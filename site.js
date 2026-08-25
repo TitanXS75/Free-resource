@@ -3,8 +3,8 @@
  */
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Tab Switching for Integration Hub
-  const tabButtons = document.querySelectorAll('.tab-btn');
-  const tabPanels = document.querySelectorAll('.tab-content-panel');
+  const tabButtons = document.querySelectorAll('.framework-tab-btn, .tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-pane, .tab-content-panel');
 
   tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // 2. Clipboard Copy Functionality
-  const copyButtons = document.querySelectorAll('.btn-copy, .btn-copy-mini');
+  const copyButtons = document.querySelectorAll('.btn-mini-copy, .btn-copy, .btn-copy-mini');
   const toast = document.getElementById('toast-notice');
 
   function showToast(text = 'Copied to clipboard!') {

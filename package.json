@@ -1,0 +1,79 @@
+{
+  "name": "lang-translation",
+  "version": "1.0.0",
+  "description": "100% Free, zero-branding, client-side translation system for React, Next.js, and Angular",
+  "author": "TitanXS75",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TitanXS75/Lang-translation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TitanXS75/Lang-translation/issues"
+  },
+  "homepage": "https://github.com/TitanXS75/Lang-translation#readme",
+  "keywords": [
+    "google-translate",
+    "translation",
+    "i18n",
+    "react",
+    "nextjs",
+    "angular",
+    "localization",
+    "free-translate"
+  ],
+  "main": "./react/GoogleTranslate.jsx",
+  "module": "./react/GoogleTranslate.jsx",
+  "types": "./react/GoogleTranslate.tsx",
+  "exports": {
+    ".": {
+      "types": "./react/GoogleTranslate.tsx",
+      "import": "./react/GoogleTranslate.jsx",
+      "default": "./react/GoogleTranslate.jsx"
+    },
+    "./react": {
+      "types": "./react/GoogleTranslate.tsx",
+      "import": "./react/GoogleTranslate.jsx",
+      "default": "./react/GoogleTranslate.jsx"
+    },
+    "./react/tsx": "./react/GoogleTranslate.tsx",
+    "./react/styles.css": "./react/global-override.css",
+    "./styles.css": "./react/global-override.css",
+    "./angular": "./angular/google-translate.component.ts",
+    "./angular/styles.scss": "./angular/styles-override.scss"
+  },
+  "files": [
+    "react",
+    "angular",
+    "README.md",
+    "INTEGRATION.md"
+  ],
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0",
+    "lucide-react": "^0.200.0 || ^0.300.0 || ^0.400.0 || ^1.0.0",
+    "@angular/core": ">=15.0.0",
+    "@angular/common": ">=15.0.0",
+    "@angular/material": ">=15.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    },
+    "lucide-react": {
+      "optional": true
+    },
+    "@angular/core": {
+      "optional": true
+    },
+    "@angular/common": {
+      "optional": true
+    },
+    "@angular/material": {
+      "optional": true
+    }
+  }
+}

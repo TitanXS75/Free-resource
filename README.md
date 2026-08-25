@@ -1,4 +1,4 @@
-﻿# 🌐 Zero-Cost Real-Time Multi-Language Translation System
+# 🌐 Zero-Cost Real-Time Multi-Language Translation System
 
 > **A 100% free, production-ready, client-side translation system for web applications (Angular, React, Vue, Next.js, Vite).**  
 > Features a modern custom modal popup, full elimination of Google branding/sidebars/banners, and instant real-time DOM translation.
@@ -6,6 +6,7 @@
 ---
 
 ## 📌 Table of Contents
+0. [⚡ Quick Installation (NPM / Submodule)](#-quick-installation)
 1. [Core Features](#-core-features)
 2. [How It Works (Under the Hood)](#-how-it-works-under-the-hood)
 3. [The Secrets: Suppressing Google UI & Unwanted Sidebars](#-the-secrets-suppressing-google-ui--unwanted-sidebars)
@@ -13,7 +14,24 @@
 5. [Angular Integration Guide](#-angular-integration-guide)
 6. [React / Vite / Next.js Integration Guide](#-react--vite--nextjs-integration-guide)
 7. [Supported Languages Customization](#-supported-languages-customization)
-8. [File Structure in This Package](#-file-structure-in-this-package)
+8. [Full Integration Guide (INTEGRATION.md)](./INTEGRATION.md)
+9. [File Structure in This Package](#-file-structure-in-this-package)
+
+---
+
+## ⚡ Quick Installation
+
+You can install this package directly into any project without manual cloning:
+
+```bash
+# Direct NPM install via GitHub
+npm install git+https://github.com/TitanXS75/Lang-translation.git
+
+# Or add as a Git Submodule
+git submodule add https://github.com/TitanXS75/Lang-translation.git src/shared/lang-translation
+```
+
+👉 See the complete [**INTEGRATION.md**](./INTEGRATION.md) for full React, Next.js, and Angular setup examples.
 
 ---
 
@@ -246,8 +264,10 @@ export const SUPPORTED_LANGUAGES = [
 ## 📂 File Structure in This Package
 
 ```
-D:\Projects\Free language translation/
-├── README.md                           <-- Complete architecture & integration guide
+Lang-translation/
+├── package.json                        <-- NPM Git package definition & export maps
+├── INTEGRATION.md                      <-- Step-by-step setup for NPM & Submodules
+├── README.md                           <-- Architecture & technical breakdown
 ├── angular/
 │   ├── google-translate.component.ts   <-- Angular Standalone Component Logic
 │   ├── google-translate.component.html <-- Custom Settings Modal Template

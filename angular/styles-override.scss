@@ -1,0 +1,61 @@
+﻿// =============================================================================
+// Google Translate Global Fixes & Sidebar/Frame Suppression
+// (Add this to your root styles.scss or styles.css)
+// =============================================================================
+body {
+  top: 0 !important;
+  position: static !important;
+}
+
+/* Suppress all Google Translate floating elements, sidebars, banner frames, and popups */
+.goog-te-banner-frame,
+iframe.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+.goog-te-ftab-frame,
+iframe.goog-te-ftab-frame,
+.goog-te-ftab,
+.goog-te-balloon-frame,
+iframe.goog-te-balloon-frame,
+#goog-gt-tt,
+.goog-tooltip,
+.goog-tooltip:hover,
+.goog-text-highlight,
+iframe[id^=":0.container"],
+iframe[id^=":1.container"],
+iframe[id^=":2.container"],
+.VIpgJd-ZVi9od-OR94Gd-PR6tc,
+iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf-ti6hGc,
+.VIpgJd-y606eb-L7AdLc,
+div.skiptranslate:not(.google-translate-container):not(.translate-widget),
+.goog-logo-link,
+.goog-logo-link:link,
+.goog-logo-link:visited,
+.goog-logo-link:hover,
+.goog-logo-link:active,
+.goog-te-gadget-icon {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  max-height: 0 !important;
+  max-width: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+}
+
+#google_translate_hidden_element,
+.hidden-translate-engine {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+}

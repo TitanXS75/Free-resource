@@ -1,0 +1,106 @@
+﻿<!-- Language Trigger Button -->
+<button
+  type="button"
+  class="language-trigger-btn notranslate"
+  translate="no"
+  (click)="openModal()"
+  [matTooltip]="'Current language: ' + getCurrentLanguageName()"
+  matTooltipPosition="below"
+  aria-label="Select Language"
+>
+  <mat-icon class="globe-icon notranslate" translate="no">language</mat-icon>
+  <span class="btn-text notranslate" translate="no">{{ getCurrentLanguageName() }}</span>
+</button>
+
+<!-- Language Selection Modal (Hardcoded, excluded from translation) -->
+@if (isModalOpen()) {
+  <div
+    class="modal-backdrop notranslate"
+    translate="no"
+    (click)="closeModal()"
+  >
+    <div
+      class="modal-card notranslate"
+      translate="no"
+      (click)="$event.stopPropagation()"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
+      <!-- Modal Header -->
+      <div class="modal-header notranslate" translate="no">
+        <div class="header-titles notranslate" translate="no">
+          <h1
+            id="modal-title"
+            class="main-title notranslate"
+            translate="no"
+          >Settings</h1>
+          <p class="main-subtitle notranslate" translate="no">Customize your experience</p>
+        </div>
+        <button
+          type="button"
+          class="close-btn notranslate"
+          translate="no"
+          (click)="closeModal()"
+          aria-label="Close"
+        >
+          <mat-icon class="notranslate" translate="no">close</mat-icon>
+        </button>
+      </div>
+
+      <!-- Settings Body -->
+      <div class="modal-body notranslate" translate="no">
+        <div class="settings-section notranslate" translate="no">
+          <!-- Section Title with Globe Icon -->
+          <div class="section-header notranslate" translate="no">
+            <div class="section-title-row notranslate" translate="no">
+              <mat-icon class="section-globe-icon notranslate" translate="no">language</mat-icon>
+              <h2 class="section-title notranslate" translate="no">Language</h2>
+            </div>
+            <p class="section-subtitle notranslate" translate="no">Select your preferred language</p>
+          </div>
+
+          <!-- 3-Column Language Cards Grid -->
+          <div class="languages-grid notranslate" translate="no">
+            @for (lang of languages; track lang.code) {
+              <button
+                type="button"
+                class="lang-card notranslate"
+                translate="no"
+                [class.selected]="tempSelectedLang() === lang.code"
+                (click)="selectTempLanguage(lang.code)"
+              >
+                <div class="card-main-row notranslate" translate="no">
+                  <span class="country-badge notranslate" translate="no">{{ lang.country }}</span>
+                  <span class="lang-name notranslate" translate="no">{{ lang.name }}</span>
+                </div>
+                @if (lang.nativeName) {
+                  <span class="native-name notranslate" translate="no">{{ lang.nativeName }}</span>
+                }
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer notranslate" translate="no">
+        <button
+          type="button"
+          class="apply-btn notranslate"
+          translate="no"
+          (click)="applyLanguage()"
+        >
+          Apply Language Change
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+<!-- Hidden Google Translate Element required for translation engine -->
+<div
+  id="google_translate_hidden_element"
+  class="hidden-translate-engine notranslate"
+  translate="no"
+></div>

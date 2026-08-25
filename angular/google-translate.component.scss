@@ -1,0 +1,318 @@
+﻿:host {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
+/* -------------------------------------------------------------------------
+   Trigger Button in Navigation Header / Tab Bar
+   ------------------------------------------------------------------------- */
+.language-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 10px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 6px;
+  cursor: pointer;
+  color: #ffffff;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  flex-shrink: 0;
+
+  .globe-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    color: #60a5fa;
+  }
+
+  .btn-text {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: #ffffff;
+  }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: #ffffff;
+
+    .globe-icon {
+      color: #93c5fd;
+    }
+  }
+
+  &:active {
+    background-color: rgba(255, 255, 255, 0.22);
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Modal Backdrop & Dialog Card
+   ------------------------------------------------------------------------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(10, 11, 13, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 16px;
+  animation: fadeIn 0.15s ease-out;
+}
+
+.modal-card {
+  background: var(--color-surface, #ffffff);
+  color: var(--color-foreground, #0a0b0d);
+  width: 100%;
+  max-width: 660px;
+  border-radius: 16px;
+  border: 1px solid var(--color-border-light, #dee1e6);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: scaleIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+/* -------------------------------------------------------------------------
+   Modal Header
+   ------------------------------------------------------------------------- */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 22px 24px 14px;
+
+  .header-titles {
+    .main-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--color-foreground, #0a0b0d);
+      margin: 0;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+
+    .main-subtitle {
+      font-size: 13px;
+      color: var(--color-text-muted, #7c828a);
+      margin: 4px 0 0;
+    }
+  }
+
+  .close-btn {
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--color-text-muted, #7c828a);
+    transition: all 0.15s ease;
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover {
+      background-color: var(--color-surface-soft, #f7f7f7);
+      color: var(--color-foreground, #0a0b0d);
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Modal Body & Section Box
+   ------------------------------------------------------------------------- */
+.modal-body {
+  padding: 6px 24px 18px;
+  overflow-y: auto;
+  max-height: 68vh;
+
+  .settings-section {
+    background: var(--color-surface, #ffffff);
+    border: 1px solid var(--color-border-light, #dee1e6);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+
+  .section-header {
+    margin-bottom: 16px;
+
+    .section-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .section-globe-icon {
+        color: var(--color-primary, #0052ff);
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+      }
+
+      .section-title {
+        font-size: 14.5px;
+        font-weight: 600;
+        color: var(--color-foreground, #0a0b0d);
+        margin: 0;
+      }
+    }
+
+    .section-subtitle {
+      font-size: 12px;
+      color: var(--color-text-muted, #7c828a);
+      margin: 3px 0 0 26px;
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Language Cards 3-Column Grid
+   ------------------------------------------------------------------------- */
+.languages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lang-card {
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-border-light, #dee1e6);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  outline: none;
+  min-height: 54px;
+
+  .card-main-row {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    .country-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-text-muted, #7c828a);
+      text-transform: uppercase;
+    }
+
+    .lang-name {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--color-foreground, #0a0b0d);
+    }
+  }
+
+  .native-name {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--color-text-muted, #7c828a);
+  }
+
+  &:hover {
+    border-color: var(--color-primary-disabled, #a8b8cc);
+    background-color: var(--color-surface-soft, #f7f7f7);
+  }
+
+  /* Active Selected State */
+  &.selected {
+    border: 2px solid var(--color-primary, #0052ff);
+    background-color: var(--color-primary-subtle, #e8f1fc);
+
+    .country-badge {
+      color: var(--color-primary, #0052ff);
+    }
+
+    .lang-name {
+      color: var(--color-primary, #0052ff);
+      font-weight: 600;
+    }
+
+    .native-name {
+      color: var(--color-primary, #0052ff);
+      opacity: 0.85;
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Modal Footer Action Button
+   ------------------------------------------------------------------------- */
+.modal-footer {
+  padding: 6px 24px 22px;
+
+  .apply-btn {
+    width: 100%;
+    background: var(--color-primary, #0052ff);
+    color: var(--color-on-primary, #ffffff);
+    border: none;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: var(--color-primary-hover, #003ecc);
+    }
+
+    &:active {
+      transform: scale(0.99);
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Hidden Google Engine & Sidebars / Toolbars
+   ------------------------------------------------------------------------- */
+.hidden-translate-engine {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lang-Translation - Free Google Translation for React, Angular & Web</title>
+  <title>Lang-Translation - Free Enterprise-Grade Client-Side Translation</title>
   <meta name="description" content="100% Free client-side Google Translation system with zero branding, custom modal UI, and instant multi-language support.">
 
   <!-- Core Styles -->
@@ -12,34 +12,38 @@
 </head>
 <body>
 
-  <!-- Top Marquee Banner -->
-  <div class="marquee-bar notranslate" translate="no">
-    <div class="marquee-content">
-      ⚡ 100% FREE CLIENT-SIDE TRANSLATION • ZERO GOOGLE BRANDING • NO API KEYS • NO CREDIT CARD • REACT • NEXT.JS • ANGULAR • VANILLA HTML/CSS • INSTANT DOM TRANSLATION • 
-      ⚡ 100% FREE CLIENT-SIDE TRANSLATION • ZERO GOOGLE BRANDING • NO API KEYS • NO CREDIT CARD • REACT • NEXT.JS • ANGULAR • VANILLA HTML/CSS • INSTANT DOM TRANSLATION •
-    </div>
+  <!-- Top Announcement Banner -->
+  <div class="announcement-bar">
+    <span class="announcement-badge">NEW</span>
+    Zero Google Branding • 100% Free Forever • Ready for React, Next.js, Angular & HTML/CSS
   </div>
 
   <!-- Navbar -->
   <header class="navbar">
     <div class="container nav-inner">
-      <a href="./index.html" class="brand-badge notranslate" translate="no">
-        <span class="brand-logo-box">LANG</span>
-        <span>TRANSLATION</span>
+      <a href="./index.html" class="brand-wrapper">
+        <div class="brand-icon notranslate" translate="no">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+        </div>
+        <span>Lang-Translation</span>
       </a>
 
-      <ul class="nav-links">
-        <li><a href="#demo" class="nav-link">Live Demo</a></li>
-        <li><a href="#features" class="nav-link">Features</a></li>
-        <li><a href="#comparison" class="nav-link">Why This?</a></li>
-        <li><a href="./integration.html" class="nav-link active">Integration Hub ⚡</a></li>
+      <ul class="nav-menu">
+        <li><a href="#demo" class="nav-item-link">Live Demo</a></li>
+        <li><a href="#features" class="nav-item-link">Features</a></li>
+        <li><a href="#comparison" class="nav-item-link">Comparison</a></li>
+        <li><a href="./integration.html" class="nav-item-link active">Integration Hub</a></li>
       </ul>
 
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <!-- Live Embedded Language Widget -->
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <!-- Embedded Language Widget -->
         <div id="google-translate-widget"></div>
 
-        <a href="https://github.com/TitanXS75/Lang-translation" target="_blank" rel="noopener noreferrer" class="btn-brutal btn-black notranslate" translate="no">
+        <a href="https://github.com/TitanXS75/Lang-translation" target="_blank" rel="noopener noreferrer" class="btn-modern btn-secondary">
           ★ GitHub
         </a>
       </div>
@@ -47,82 +51,82 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="hero-section">
-    <div class="container hero-grid">
-      <div class="hero-left">
-        <div class="hero-tag notranslate" translate="no">
-          <span>🚀 Production Ready</span>
-          <span>•</span>
-          <span>Zero Cost Forever</span>
+  <section class="hero-wrapper">
+    <div class="container hero-content-grid">
+      <div class="hero-left-column">
+        <div class="pill-tag">
+          <span class="pill-dot"></span>
+          <span>Zero API Keys • Production Ready</span>
         </div>
 
-        <h1 class="hero-title">
-          FREE GOOGLE TRANSLATION. <span class="highlight">ZERO BRANDING.</span>
+        <h1 class="hero-main-title">
+          Free Google Translation. <br>
+          <span class="gradient-text">Zero Google Branding.</span>
         </h1>
 
-        <p class="hero-desc">
-          Supercharge your web application with instant client-side multi-language translation. Eliminates all Google logos, unwanted top bars, and tooltips while giving you a modern, customizable modal.
+        <p class="hero-lead-text">
+          A high-performance client-side multi-language translation engine for web applications. Eliminates top banner frames, sidebars, and popups while providing a sleek, modern language switcher.
         </p>
 
-        <div class="hero-actions notranslate" translate="no">
-          <button type="button" id="trigger-live-modal" class="btn-brutal btn-yellow">
-            🌐 Test Live Modal Popup
+        <div class="hero-btn-row">
+          <button type="button" id="trigger-live-modal" class="btn-modern btn-primary">
+            🌐 Open Language Modal
           </button>
-          <a href="./integration.html" class="btn-brutal btn-cyan">
-            ⚡ Get Integration Commands
+          <a href="./integration.html" class="btn-modern btn-secondary">
+            ⚡ Integration Guide
           </a>
         </div>
 
         <!-- Quick Copy Command Bar -->
-        <div class="quick-copy-bar notranslate" translate="no">
-          <code>npm i git+https://github.com/TitanXS75/Lang-translation.git</code>
-          <button type="button" class="btn-copy-mini" data-copy-text="npm install git+https://github.com/TitanXS75/Lang-translation.git">
+        <div class="cli-copy-box">
+          <code class="notranslate" translate="no">npm i git+https://github.com/TitanXS75/Lang-translation.git</code>
+          <button type="button" class="btn-mini-copy" data-copy-text="npm install git+https://github.com/TitanXS75/Lang-translation.git">
             Copy
           </button>
         </div>
       </div>
 
       <!-- Live Interactive Sandbox Card -->
-      <div class="hero-right" id="demo">
-        <div class="sandbox-card">
-          <div class="sandbox-header notranslate" translate="no">
-            <div class="sandbox-dots">
-              <span class="dot dot-red"></span>
-              <span class="dot dot-yellow"></span>
-              <span class="dot dot-green"></span>
+      <div class="hero-right-column" id="demo">
+        <div class="preview-card">
+          <div class="card-topbar">
+            <div class="traffic-dots notranslate" translate="no">
+              <span class="traffic-dot traffic-red"></span>
+              <span class="traffic-dot traffic-yellow"></span>
+              <span class="traffic-dot traffic-green"></span>
             </div>
             <span>LIVE INTERACTIVE PREVIEW</span>
           </div>
 
-          <div class="sandbox-body">
-            <span class="sandbox-badge">Real-Time Reactive DOM</span>
-            <h2 class="sandbox-title">Global Reach for Every User</h2>
-            <p class="sandbox-text">
+          <div class="card-inner-body">
+            <span class="status-badge-live">Real-Time Reactive DOM</span>
+            <h2 class="preview-heading">Global Reach for Every User</h2>
+            <p class="preview-paragraph">
               When you select a new language from the trigger button above, all cards, text headings, statistics, and buttons across your application translate in real-time.
             </p>
 
-            <div class="sandbox-stats-grid">
-              <div class="stat-box">
-                <div class="stat-value">$0.00</div>
-                <div class="stat-label">Total Cost Per Month</div>
+            <div class="metrics-row">
+              <div class="metric-item">
+                <div class="metric-num">$0.00</div>
+                <div class="metric-label">Monthly Cost</div>
               </div>
-              <div class="stat-box">
-                <div class="stat-value">100+</div>
-                <div class="stat-label">Supported Languages</div>
+              <div class="metric-item">
+                <div class="metric-num">100+</div>
+                <div class="metric-label">Languages Supported</div>
               </div>
-              <div class="stat-box">
-                <div class="stat-value">0ms</div>
-                <div class="stat-label">Backend Setup Required</div>
+              <div class="metric-item">
+                <div class="metric-num">0ms</div>
+                <div class="metric-label">Backend Setup Time</div>
               </div>
-              <div class="stat-box">
-                <div class="stat-value">100%</div>
-                <div class="stat-label">Client-Side Autonomy</div>
+              <div class="metric-item">
+                <div class="metric-num">100%</div>
+                <div class="metric-label">Client-Side Autonomy</div>
               </div>
             </div>
 
-            <div class="sandbox-footer-action">
-              <span style="font-weight: 700; font-size: 13px;">Try switching languages now! ☝️</span>
-              <span class="btn-brutal btn-lime" style="font-size: 12px; padding: 6px 12px;">Active & Live</span>
+            <div class="card-bottom-cta">
+              <span style="font-weight: 600; font-size: 13.5px; color: var(--text-muted);">Try changing languages in the header! ☝️</span>
+              <span class="btn-modern btn-primary" style="font-size: 12.5px; padding: 6px 14px;">Active & Live</span>
             </div>
           </div>
         </div>
@@ -131,103 +135,103 @@
   </section>
 
   <!-- Features Grid -->
-  <section class="section" id="features">
+  <section class="section-wrapper" id="features">
     <div class="container">
-      <div class="section-header-area">
-        <span class="section-tag notranslate" translate="no">Core Capabilities</span>
-        <h2 class="section-heading">Why Developers Love This Architecture</h2>
-        <p class="section-subtitle">A bulletproof solution that combines Google's powerful neural machine translation with a clean developer experience.</p>
+      <div class="section-head">
+        <span class="section-eyebrow">Enterprise Capabilities</span>
+        <h2 class="section-title-large">Built for Modern Frontend Teams</h2>
+        <p class="section-desc-muted">Combines Google's neural translation power with clean, decoupled frontend architecture.</p>
       </div>
 
-      <div class="features-grid">
-        <div class="feature-box">
-          <div class="feature-icon-box" style="background-color: var(--color-yellow);">🚫</div>
-          <h3 class="feature-title">Zero Google Branding</h3>
-          <p class="feature-desc">Our CSS injection rules permanently suppress the top Google Translate banner frame, the floating sidebars, hover translation balloons, and ugly popups.</p>
+      <div class="features-layout">
+        <div class="feature-card-modern">
+          <div class="feature-icon-wrapper">🚫</div>
+          <h3 class="feature-card-title">Zero Google Branding</h3>
+          <p class="feature-card-desc">Suppresses the top Google Translate banner frame, the floating sidebars, hover translation balloons, and ugly popups.</p>
         </div>
 
-        <div class="feature-box">
-          <div class="feature-icon-box" style="background-color: var(--color-cyan);">🎨</div>
-          <h3 class="feature-title">Modern Custom Modal</h3>
-          <p class="feature-desc">Replaces outdated default browser dropdowns with a sleek, 3-column country card selection dialog with light and dark theme compatibility.</p>
+        <div class="feature-card-modern">
+          <div class="feature-icon-wrapper">🎨</div>
+          <h3 class="feature-card-title">Modern Custom Modal</h3>
+          <p class="feature-card-desc">Replaces outdated default browser dropdowns with a sleek, 3-column country card selection dialog with light and dark theme compatibility.</p>
         </div>
 
-        <div class="feature-box">
-          <div class="feature-icon-box" style="background-color: var(--color-pink);">💾</div>
-          <h3 class="feature-title">Persistent Cookie Memory</h3>
-          <p class="feature-desc">Automatically maintains user preferences via root-path <code>googtrans</code> cookies so selections persist seamlessly across page reloads and routes.</p>
+        <div class="feature-card-modern">
+          <div class="feature-icon-wrapper">💾</div>
+          <h3 class="feature-card-title">Persistent Cookie Memory</h3>
+          <p class="feature-card-desc">Automatically maintains user preferences via root-path <code>googtrans</code> cookies so selections persist seamlessly across page reloads and routes.</p>
         </div>
 
-        <div class="feature-box">
-          <div class="feature-icon-box" style="background-color: var(--color-lime);">🛡️</div>
-          <h3 class="feature-title">Protected Settings Dialog</h3>
-          <p class="feature-desc">Configured with <code>translate="no"</code> and <code>class="notranslate"</code> so the language switcher itself is never garbled or corrupted by the translation engine.</p>
+        <div class="feature-card-modern">
+          <div class="feature-icon-wrapper">🛡️</div>
+          <h3 class="feature-card-title">Protected Settings Dialog</h3>
+          <p class="feature-card-desc">The settings language switcher popup itself is never garbled or corrupted when translating content.</p>
         </div>
 
-        <div class="feature-box">
-          <div class="feature-icon-box" style="background-color: var(--color-purple); color: #fff;">⚛️</div>
-          <h3 class="feature-title">Multi-Framework Ready</h3>
-          <p class="feature-desc">First-class support and drop-in templates for React, Next.js (App Router), Angular Standalone Components, and Vanilla HTML/CSS.</p>
+        <div class="feature-card-modern">
+          <div class="feature-icon-wrapper">⚛️</div>
+          <h3 class="feature-card-title">Multi-Framework Ready</h3>
+          <p class="feature-card-desc">First-class support and drop-in templates for React, Next.js (App Router), Angular Standalone Components, and Vanilla HTML/CSS.</p>
         </div>
 
-        <div class="feature-box">
-          <div class="feature-icon-box" style="background-color: var(--color-orange); color: #fff;">💰</div>
-          <h3 class="feature-title">100% Free Forever</h3>
-          <p class="feature-desc">Leverages the public client-side translator engine. No Google Cloud Billing accounts, no monthly invoices, and no rate limits for client traffic.</p>
+        <div class="feature-card-modern">
+          <div class="feature-icon-wrapper">💰</div>
+          <h3 class="feature-card-title">100% Free Forever</h3>
+          <p class="feature-card-desc">Leverages the public client-side translator engine. No Google Cloud Billing accounts, no monthly invoices, and no credit cards.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Comparison Section -->
-  <section class="section" id="comparison" style="background-color: #faf5ff;">
+  <section class="section-wrapper" id="comparison" style="background-color: #0d1322;">
     <div class="container">
-      <div class="section-header-area">
-        <span class="section-tag notranslate" translate="no" style="background-color: var(--color-purple); color: #fff;">Unmatched Advantages</span>
-        <h2 class="section-heading">Compare The Alternatives</h2>
-        <p class="section-subtitle">See how Lang-translation stacks up against expensive cloud APIs and default unstyled widgets.</p>
+      <div class="section-head">
+        <span class="section-eyebrow">Direct Comparison</span>
+        <h2 class="section-title-large">Why Use Lang-Translation?</h2>
+        <p class="section-desc-muted">See how this architecture compares with official paid cloud APIs and unstyled default widgets.</p>
       </div>
 
-      <div class="comparison-table-wrapper notranslate" translate="no">
-        <table class="brutal-table">
+      <div class="table-card-container">
+        <table class="modern-table">
           <thead>
             <tr>
               <th>Feature</th>
-              <th>Official Cloud Translation API</th>
-              <th>Default Google Translate Element</th>
-              <th class="our-col">⭐ Lang-Translation (This Repo)</th>
+              <th>Cloud Translation API</th>
+              <th>Default Google Widget</th>
+              <th class="highlight-col">⭐ Lang-Translation (This Repo)</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><strong>Pricing</strong></td>
-              <td>$20 / 1,000,000 characters</td>
+              <td>$20 per 1,000,000 characters</td>
               <td>Free</td>
-              <td class="our-col"><strong>100% Free Forever</strong></td>
+              <td class="highlight-col"><strong>100% Free Forever</strong></td>
             </tr>
             <tr>
               <td><strong>Setup Friction</strong></td>
               <td>Requires GCP Account & Credit Card</td>
               <td>Requires Embed Code</td>
-              <td class="our-col"><strong>1-Line NPM / HTML Embed</strong></td>
+              <td class="highlight-col"><strong>1-Line NPM / HTML Embed</strong></td>
             </tr>
             <tr>
               <td><strong>UI & Branding</strong></td>
-              <td>Build UI completely from scratch</td>
+              <td>Build UI from scratch</td>
               <td>Ugly top banner & Google logos</td>
-              <td class="our-col"><strong>Clean Neo-Brutalist / Modern Modal</strong></td>
+              <td class="highlight-col"><strong>Clean Professional Modal</strong></td>
             </tr>
             <tr>
-              <td><strong>Google Banners & Popups</strong></td>
+              <td><strong>Banners & Tooltips</strong></td>
               <td>None</td>
-              <td>Annoying top frame shifts page layout</td>
-              <td class="our-col"><strong>100% Suppressed & Blocked</strong></td>
+              <td>Top frame breaks page layout</td>
+              <td class="highlight-col"><strong>100% Suppressed & Blocked</strong></td>
             </tr>
             <tr>
-              <td><strong>Framework Support</strong></td>
-              <td>Custom SDK wiring required</td>
-              <td>Hard to integrate with React/Angular</td>
-              <td class="our-col"><strong>Ready for React, Next.js, Angular, HTML</strong></td>
+              <td><strong>Framework Ready</strong></td>
+              <td>Custom SDK wiring needed</td>
+              <td>Hard to wire in React/Angular</td>
+              <td class="highlight-col"><strong>Ready for React, Next.js, Angular, HTML</strong></td>
             </tr>
           </tbody>
         </table>
@@ -235,32 +239,38 @@
     </div>
   </section>
 
-  <!-- Quick CTA -->
-  <section class="section" style="background-color: var(--color-yellow); text-align: center;">
+  <!-- CTA Section -->
+  <section class="section-wrapper" style="text-align: center; background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.12), transparent 70%);">
     <div class="container">
-      <h2 style="font-size: 3rem; font-weight: 900; margin-bottom: 16px;">Ready to Integrate?</h2>
-      <p style="font-size: 1.25rem; font-weight: 600; max-width: 680px; margin: 0 auto 28px;">
+      <h2 class="section-title-large" style="font-size: 2.75rem; margin-bottom: 16px;">Ready to Add to Your Project?</h2>
+      <p class="section-desc-muted" style="max-width: 600px; margin: 0 auto 32px;">
         Head over to our Integration Hub to copy pre-made commands for React, Next.js, Angular, or Vanilla HTML in 30 seconds.
       </p>
       <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
-        <a href="./integration.html" class="btn-brutal btn-black notranslate" translate="no" style="font-size: 18px; padding: 14px 28px;">
+        <a href="./integration.html" class="btn-modern btn-primary" style="font-size: 16px; padding: 14px 28px;">
           ⚡ Open Integration Hub
         </a>
-        <a href="https://github.com/TitanXS75/Lang-translation" target="_blank" rel="noopener noreferrer" class="btn-brutal btn-white notranslate" translate="no" style="font-size: 18px; padding: 14px 28px;">
-          ⭐ Star on GitHub
+        <a href="https://github.com/TitanXS75/Lang-translation" target="_blank" rel="noopener noreferrer" class="btn-modern btn-secondary" style="font-size: 16px; padding: 14px 28px;">
+          ★ Star on GitHub
         </a>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="container footer-inner notranslate" translate="no">
-      <div class="brand-badge" style="color: #fff;">
-        <span class="brand-logo-box" style="color: #000;">LANG</span>
-        <span>TRANSLATION</span>
+  <footer class="footer-wrapper">
+    <div class="container footer-inner-content">
+      <div class="brand-wrapper">
+        <div class="brand-icon notranslate" translate="no" style="width: 28px; height: 28px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="2" y1="12" x2="22" y2="12"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+        </div>
+        <span>Lang-Translation</span>
       </div>
-      <div class="footer-text">
+      <div>
         Created by <a href="https://github.com/TitanXS75" target="_blank" rel="noopener noreferrer">TitanXS75</a> • Released under MIT License • Built for the Developer Community.
       </div>
     </div>

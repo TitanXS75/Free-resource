@@ -434,8 +434,9 @@ iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
 
 .card-bottom-cta {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  text-align: center;
   padding-top: 16px;
   border-top: 1px solid var(--border-subtle);
 }

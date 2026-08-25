@@ -16,38 +16,70 @@
     { code: 'kn', country: 'IN', name: 'Kannada', nativeName: 'ಕನ್ನಡ' },
     { code: 'ml', country: 'IN', name: 'Malayalam', nativeName: 'മലയാളം' },
     { code: 'pa', country: 'IN', name: 'Punjabi', nativeName: 'ਪੰਜਾਬੀ' },
-    { code: 'ur', country: 'IN', name: 'Urdu', nativeName: 'اردو' }
+    { code: 'ur', country: 'IN', name: 'Urdu', nativeName: 'اردو' },
+    { code: 'es', country: 'ES', name: 'Spanish', nativeName: 'Español' },
+    { code: 'fr', country: 'FR', name: 'French', nativeName: 'Français' },
+    { code: 'de', country: 'DE', name: 'German', nativeName: 'Deutsch' },
+    { code: 'ja', country: 'JP', name: 'Japanese', nativeName: '日本語' },
+    { code: 'ar', country: 'SA', name: 'Arabic', nativeName: 'العربية' }
   ];
 
   const GLOBE_SVG = `<svg class="gt-trigger-icon notranslate" translate="no" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`;
   const CLOSE_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`;
 
   function getSavedLanguage() {
-    const match = document.cookie.match(/googtrans=\/en\/([a-zA-Z\-]+)/);
-    return match ? match[1] : 'en';
+    if (typeof document === 'undefined') return 'en';
+    const match = document.cookie.match(/(?:^|;\s*)googtrans=([^;]+)/);
+    if (!match) return 'en';
+    const val = decodeURIComponent(match[1]);
+    const parts = val.split('/');
+    return parts[parts.length - 1] || 'en';
   }
 
   function setLanguageCookie(langCode) {
     const hostname = window.location.hostname;
-    const cookieValue = `/en/${langCode}`;
     
-    // Set for current domain & root path
-    document.cookie = `googtrans=${cookieValue}; path=/; max-age=31536000`;
-    
-    // Also set for apex domain if not on localhost/ip
-    if (hostname && !hostname.match(/^(\d+\.){3}\d+$/) && hostname !== 'localhost') {
-      const parts = hostname.split('.');
-      if (parts.length > 1) {
-        const rootDomain = '.' + parts.slice(-2).join('.');
-        document.cookie = `googtrans=${cookieValue}; domain=${rootDomain}; path=/; max-age=31536000`;
+    if (langCode === 'en') {
+      // Clear cookie to reset to original language
+      document.cookie = 'googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; max-age=0;';
+      if (hostname && hostname !== 'localhost') {
+        const parts = hostname.split('.');
+        if (parts.length > 1) {
+          const apex = '.' + parts.slice(-2).join('.');
+          document.cookie = `googtrans=; domain=${apex}; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; max-age=0;`;
+        }
+        document.cookie = `googtrans=; domain=.${hostname}; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; max-age=0;`;
+      }
+    } else {
+      const cookieVal = `/en/${langCode}`;
+      document.cookie = `googtrans=${cookieVal}; path=/; max-age=31536000; SameSite=Lax`;
+      if (hostname && !hostname.match(/^(\d+\.){3}\d+$/) && hostname !== 'localhost') {
+        const parts = hostname.split('.');
+        if (parts.length > 1) {
+          const apex = '.' + parts.slice(-2).join('.');
+          document.cookie = `googtrans=${cookieVal}; domain=${apex}; path=/; max-age=31536000; SameSite=Lax`;
+        }
+        document.cookie = `googtrans=${cookieVal}; domain=.${hostname}; path=/; max-age=31536000; SameSite=Lax`;
       }
     }
   }
 
-  function injectGoogleScript() {
-    if (document.getElementById('google-translate-api-script')) return;
+  function triggerGoogleCombo(langCode) {
+    let combo = document.querySelector('.goog-te-combo');
+    if (!combo) {
+      const hidden = document.getElementById('google_translate_hidden_element');
+      if (hidden) combo = hidden.querySelector('select');
+    }
+    if (combo) {
+      combo.value = langCode;
+      combo.dispatchEvent(new Event('change', { bubbles: true }));
+      return true;
+    }
+    return false;
+  }
 
-    // Create hidden translation container if not present
+  function injectGoogleScript() {
+    // 1. Ensure hidden translation element exists in body
     if (!document.getElementById('google_translate_hidden_element')) {
       const hiddenDiv = document.createElement('div');
       hiddenDiv.id = 'google_translate_hidden_element';
@@ -56,24 +88,31 @@
       document.body.appendChild(hiddenDiv);
     }
 
-    // Define callback
+    // 2. Define global callback
     window.googleTranslateElementInit = function () {
-      new window.google.translate.TranslateElement(
-        {
-          pageLanguage: 'en',
-          autoDisplay: false,
-          layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
-        },
-        'google_translate_hidden_element'
-      );
+      try {
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: 'en',
+            autoDisplay: false,
+            layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
+          },
+          'google_translate_hidden_element'
+        );
+      } catch (e) {
+        console.warn('Google translate init warning:', e);
+      }
     };
 
-    const script = document.createElement('script');
-    script.id = 'google-translate-api-script';
-    script.type = 'text/javascript';
-    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-    script.async = true;
-    document.head.appendChild(script);
+    // 3. Inject script if not already added
+    if (!document.getElementById('google-translate-api-script')) {
+      const script = document.createElement('script');
+      script.id = 'google-translate-api-script';
+      script.type = 'text/javascript';
+      script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      script.async = true;
+      document.head.appendChild(script);
+    }
   }
 
   class GoogleTranslateWidget {
@@ -84,7 +123,7 @@
         : (options.container || document.getElementById('google-translate-widget'));
       this.currentLang = getSavedLanguage();
       this.tempSelectedLang = this.currentLang;
-      this.theme = options.theme || 'dark'; // 'light' or 'dark'
+      this.theme = options.theme || 'dark';
 
       this.init();
     }
@@ -113,7 +152,6 @@
     }
 
     renderModal() {
-      // Check if modal already in DOM
       let backdrop = document.getElementById('gt-modal-backdrop');
       if (!backdrop) {
         backdrop = document.createElement('div');
@@ -142,14 +180,14 @@
           <div class="gt-modal-header notranslate" translate="no">
             <div>
               <h2 class="gt-header-title notranslate" translate="no">Language Settings</h2>
-              <p class="gt-header-subtitle notranslate" translate="no">Customize your viewing language</p>
+              <p class="gt-header-subtitle notranslate" translate="no">Customize your preferred language</p>
             </div>
             <button type="button" class="gt-close-btn notranslate" translate="no" aria-label="Close">${CLOSE_SVG}</button>
           </div>
           <div class="gt-modal-body notranslate" translate="no">
             <div class="gt-section-header notranslate" translate="no">
               ${GLOBE_SVG}
-              <span class="gt-section-title notranslate" translate="no">Select Preferred Language</span>
+              <span class="gt-section-title notranslate" translate="no">Select Language</span>
             </div>
             <div class="gt-languages-grid notranslate" translate="no">
               ${cardsHtml}
@@ -208,19 +246,20 @@
       setLanguageCookie(langCode);
       this.closeModal();
 
-      // Update Trigger text
+      // Update button text
       if (this.triggerBtn) {
         const textSpan = this.triggerBtn.querySelector('.gt-btn-text');
         if (textSpan) textSpan.textContent = this.getCurrentLangName();
       }
 
-      // Trigger Google Combo change or reload DOM
-      const combo = document.querySelector('.goog-te-combo');
-      if (combo) {
-        combo.value = langCode;
-        combo.dispatchEvent(new Event('change', { bubbles: true }));
-      } else {
-        window.location.reload();
+      // 1. Try to trigger the select combo directly
+      const triggered = triggerGoogleCombo(langCode);
+
+      // 2. If combo is not ready or switching back to English, reload page with new cookie
+      if (!triggered || langCode === 'en') {
+        setTimeout(() => {
+          window.location.reload();
+        }, 150);
       }
     }
   }
@@ -231,10 +270,16 @@
   };
 
   // Auto-init on page load if default container exists
-  document.addEventListener('DOMContentLoaded', function () {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      if (document.getElementById('google-translate-widget')) {
+        window.initGoogleTranslate({ container: '#google-translate-widget' });
+      }
+    });
+  } else {
     if (document.getElementById('google-translate-widget')) {
       window.initGoogleTranslate({ container: '#google-translate-widget' });
     }
-  });
+  }
 
 })(window, document);

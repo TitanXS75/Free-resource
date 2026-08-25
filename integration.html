@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integration Hub & Commands - Lang-Translation</title>
+  <meta name="description" content="Copy-paste installation commands and code snippets for React, Next.js, Angular, Vanilla HTML/CSS, and Git Submodules.">
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="./neo-brutalism.css">
+  <link rel="stylesheet" href="./vanilla/google-translate.css">
+</head>
+<body>
+
+  <!-- Top Marquee Banner -->
+  <div class="marquee-bar notranslate" translate="no">
+    <div class="marquee-content">
+      ⚡ DIRECT COMMANDS • ONE-CLICK COPY • REACT • NEXT.JS • ANGULAR • VANILLA HTML/CSS • GIT SUBMODULE • 
+      ⚡ DIRECT COMMANDS • ONE-CLICK COPY • REACT • NEXT.JS • ANGULAR • VANILLA HTML/CSS • GIT SUBMODULE •
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="./index.html" class="brand-badge notranslate" translate="no">
+        <span class="brand-logo-box">LANG</span>
+        <span>TRANSLATION</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="./index.html" class="nav-link">Home</a></li>
+        <li><a href="./index.html#demo" class="nav-link">Live Demo</a></li>
+        <li><a href="./integration.html" class="nav-link active">Integration Hub ⚡</a></li>
+      </ul>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <!-- Embedded Language Widget -->
+        <div id="google-translate-widget"></div>
+
+        <a href="https://github.com/TitanXS75/Lang-translation" target="_blank" rel="noopener noreferrer" class="btn-brutal btn-black notranslate" translate="no">
+          ★ GitHub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Integration Header -->
+  <section class="section" style="background-color: var(--color-cyan); padding: 48px 0 36px;">
+    <div class="container" style="text-align: center;">
+      <span class="section-tag notranslate" translate="no" style="background-color: #fff;">Interactive Setup</span>
+      <h1 class="hero-title" style="font-size: 3rem; margin-bottom: 12px;">
+        INTEGRATION COMMAND HUB
+      </h1>
+      <p class="section-subtitle" style="max-width: 650px; margin: 0 auto; color: #111; font-weight: 500;">
+        Choose your framework below to view ready-to-run installation commands and copy-paste code snippets.
+      </p>
+    </div>
+  </section>
+
+  <!-- Integration Hub Tabs -->
+  <section class="integration-section">
+    <div class="container">
+      <!-- Framework Tabs -->
+      <div class="tab-nav notranslate" translate="no">
+        <button type="button" class="tab-btn active" data-tab="tab-react">⚛️ React / Vite</button>
+        <button type="button" class="tab-btn" data-tab="tab-nextjs">▲ Next.js</button>
+        <button type="button" class="tab-btn" data-tab="tab-angular">🅰️ Angular</button>
+        <button type="button" class="tab-btn" data-tab="tab-html">🌐 HTML / CSS / Vanilla JS</button>
+        <button type="button" class="tab-btn" data-tab="tab-submodule">🔄 Git Submodule</button>
+      </div>
+
+      <!-- Tab 1: React / Vite -->
+      <div id="tab-react" class="tab-content-panel active">
+        <div class="step-item">
+          <div class="step-title">
+            <span class="step-num">1</span>
+            <span>Install Package via NPM</span>
+          </div>
+          <p style="color: #555; margin-bottom: 10px;">Run this command in your React / Vite project terminal:</p>
+          <div class="code-container notranslate" translate="no">
+            <div class="code-header">
+              <span>Terminal (Bash / PowerShell)</span>
+              <button type="button" class="btn-copy-mini" data-copy-target="code-npm-react">Copy Command</button>
+            </div>
+            <div class="code-box">
+              <pre id="code-npm-react">npm install git+https://github.com/TitanXS75/Lang-translation.git lucide-react</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-title">
+            <span class="step-num">2</span>
+            <span>Import & Add Component to Your App</span>
+          </div>
+          <div class="code-container notranslate" translate="no">
+            <div class="code-header">
+              <span>src/App.tsx or src/components/Header.tsx</span>
+              <button type="button" class="btn-copy-mini" data-copy-target="code-react-snippet">Copy Code</button>
+            </div>
+            <div class="code-box">
+              <pre id="code-react-snippet">import React from 'react';
+// 1. Import the global CSS (removes Google branding & fixes frames)
+import 'lang-translation/styles.css';
+
+// 2. Import the component
+import { GoogleTranslate } from 'lang-translation';
+
+export default function Header() {
+  return (
+    <header className="navbar">
+      <h1>My React App</h1>
+      {/* 3. Drop in the language selector widget */}
+      &lt;GoogleTranslate /&gt;
+    </header>
+  );
+}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Next.js -->
+      <div id="tab-nextjs" class="tab-content-panel">
+        <div class="step-item">
+          <div class="step-title">
+            <span class="step-num">1</span>
+            <span>Install Dependency</span>
+          </div>
+          <div class="code-container notranslate" translate="no">
+            <div class="code-header">
+              <span>Terminal</span>
+              <button type="button" class="btn-copy-mini" data-copy-target="code-npm-next">Copy Command</button>
+            </div>
+            <div class="code-box">
+              <pre id="code-npm-next">npm install git+https://github.com/TitanXS75/Lang-translation.git lucide-react</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-title">
+            <span class="step-num">2</span>
+            <span>Import CSS in Global Layout</span>
+          </div>
+          <div class="code-container notranslate" translate="no">
+            <div class="code-header">
+              <span>app/globals.css</span>
+              <button type="button" class="btn-copy-mini" data-copy-target="code-next-css">Copy Code</button>
+            </div>
+            <div class="code-box">
+              <pre id="code-next-css">@import "lang-translation/styles.css";</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-title">
+            <span class="step-num">3</span>
+            <span>Create Client Component</span>
+          </div>
+          <div class="code-container notranslate" translate="no">
+            <div class="code-header">
+              <span>app/components/LanguageSelector.tsx</span>
+              <button type="button" class="btn-copy-mini" data-copy-target="code-next-comp">Copy Code</button>
+            </div>
+            <div class="code-box">
+              <pre id="code-next-comp">'use client';
+
+import React from 'react';
+import { GoogleTranslate } from 'lang-translation';
+
+export function LanguageSelector() {
+  return &lt;GoogleTranslate /&gt;;
+}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Angular -->
+      <div id="tab-angular" class="tab-content-panel">
+        <div class="step-item">
+          <div class="step-title">
+            <span class="step-num">1</span>
+            <span>Install via NPM</span>
+          </div>
+          <div class="code-container notranslate" translate="no">
+            <div class="code-header">
+              <span>Terminal</span>
+              <button type="button" class="btn-copy-mini" data-copy-target="code-npm-angular">Copy Command</button>
+            </div>
+            <div class="code-box">
+              <pre id="code-npm-angular">npm install git+https://github.com/TitanXS75/Lang-translation.git</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-title">
+            <span class="step-num">2</span>
+            <span>Include Global Style in SCSS</span>
+          </div>
+          <div class="code-container notranslate" translate="no">
+            <div class="code-header">
+              <span>src/styles.scss</span>
+              <button type="button" class="btn-copy-mini" data-copy-target="code-angular-scss">Copy Code</button>
+            </div>
+            <div class="code-box">
+              <pre id="code-angular-scss">@import "lang-translation/angular/styles-override.scss";</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-title">
+            <span class="step-num">3</span>
+            <span>Import in Standalone Component</span>
+          </div>
+          <div class="code-container notranslate" translate="no">
+            <div class="code-header">
+              <span>src/app/header/header.component.ts</span>
+              <button type="button" class="btn-copy-mini" data-copy-target="code-angular-comp">Copy Code</button>
+            </div>
+            <div class="code-box">
+              <pre id="code-angular-comp">import { Component } from '@angular/core';
+import { GoogleTranslateComponent } from 'lang-translation/angular';
+
+@Component({
+  selector: 'app-header',
+  standalone: true,
+  imports: [GoogleTranslateComponent],
+  template: `
+    &lt;nav class="navbar"&gt;
+      &lt;span class="brand"&gt;My Angular App&lt;/span&gt;
+      &lt;app-google-translate&gt;&lt;/app-google-translate&gt;
+    &lt;/nav&gt;
+  `
+})
+export class HeaderComponent {}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: Vanilla HTML/CSS -->
+      <div id="tab-html" class="tab-content-panel">
+        <div class="step-item">
+          <div class="step-title">
+            <span class="step-num">1</span>
+            <span>Download or Link CSS & JS</span>
+          </div>
+          <p style="color: #555; margin-bottom: 10px;">Copy <code>google-translate.css</code> and <code>google-translate.js</code> from the <code>vanilla/</code> folder into your website directory.</p>
+        </div>
+
+        <div class="step-item">
+          <div class="step-title">
+            <span class="step-num">2</span>
+            <span>Drop into your HTML page</span>
+          </div>
+          <div class="code-container notranslate" translate="no">
+            <div class="code-header">
+              <span>index.html</span>
+              <button type="button" class="btn-copy-mini" data-copy-target="code-vanilla-html">Copy Code</button>
+            </div>
+            <div class="code-box">
+              <pre id="code-vanilla-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;!-- 1. Link the CSS in &lt;head&gt; --&gt;
+  &lt;link rel="stylesheet" href="./google-translate.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;header&gt;
+    &lt;!-- 2. Place this container element anywhere in your navbar --&gt;
+    &lt;div id="google-translate-widget"&gt;&lt;/div&gt;
+  &lt;/header&gt;
+
+  &lt;!-- 3. Include the Script at the bottom of &lt;body&gt; (Auto-initializes) --&gt;
+  &lt;script src="./google-translate.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 5: Git Submodule -->
+      <div id="tab-submodule" class="tab-content-panel">
+        <div class="step-item">
+          <div class="step-title">
+            <span class="step-num">1</span>
+            <span>Add Submodule to your Git Project</span>
+          </div>
+          <div class="code-container notranslate" translate="no">
+            <div class="code-header">
+              <span>Terminal</span>
+              <button type="button" class="btn-copy-mini" data-copy-target="code-submodule-add">Copy Command</button>
+            </div>
+            <div class="code-box">
+              <pre id="code-submodule-add">git submodule add https://github.com/TitanXS75/Lang-translation.git src/shared/lang-translation</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-title">
+            <span class="step-num">2</span>
+            <span>Update Submodule Anytime</span>
+          </div>
+          <div class="code-container notranslate" translate="no">
+            <div class="code-header">
+              <span>Terminal</span>
+              <button type="button" class="btn-copy-mini" data-copy-target="code-submodule-update">Copy Command</button>
+            </div>
+            <div class="code-box">
+              <pre id="code-submodule-update">git submodule update --remote --merge</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner notranslate" translate="no">
+      <div class="brand-badge" style="color: #fff;">
+        <span class="brand-logo-box" style="color: #000;">LANG</span>
+        <span>TRANSLATION</span>
+      </div>
+      <div class="footer-text">
+        Created by <a href="https://github.com/TitanXS75" target="_blank" rel="noopener noreferrer">TitanXS75</a> • Released under MIT License.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification element -->
+  <div id="toast-notice" class="toast-notice notranslate" translate="no">Copied to clipboard!</div>
+
+  <!-- Scripts -->
+  <script src="./vanilla/google-translate.js"></script>
+  <script src="./site.js"></script>
+</body>
+</html>

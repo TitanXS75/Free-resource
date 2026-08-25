@@ -1,10 +1,10 @@
 # 🚀 Quick Integration Guide
 
-Use this component in your projects using **NPM** or **Git Submodule**.
+Use this translation system in your projects using **NPM**, **Git Submodule**, or **Direct HTML/CSS/JS**.
 
 ---
 
-## ⚡ Method 1: Install via NPM (Easiest)
+## ⚡ Method 1: Install via NPM (React / Angular / Bundlers)
 
 ### 1. Install
 ```bash
@@ -48,7 +48,37 @@ export class NavbarComponent {}
 
 ---
 
-## 🔄 Method 2: Git Submodule (Source Sync)
+## 🌐 Method 2: Pure HTML / CSS / Vanilla JS Website
+
+No framework required! Works on any static HTML, WordPress, PHP, or Laravel website.
+
+### 1. Copy or Link the 2 Files
+Copy [`vanilla/google-translate.css`](./vanilla/google-translate.css) and [`vanilla/google-translate.js`](./vanilla/google-translate.js) into your project.
+
+### 2. Add to your HTML Page
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- 1. Include CSS in <head> -->
+  <link rel="stylesheet" href="./google-translate.css">
+</head>
+<body>
+
+  <header>
+    <!-- 2. Drop the trigger container anywhere in your navbar -->
+    <div id="google-translate-widget"></div>
+  </header>
+
+  <!-- 3. Include Script at the end of <body> (Auto-initializes) -->
+  <script src="./google-translate.js"></script>
+</body>
+</html>
+```
+
+---
+
+## 🔄 Method 3: Git Submodule (Source Sync)
 
 ### 1. Add Submodule
 ```bash
@@ -56,24 +86,9 @@ git submodule add https://github.com/TitanXS75/Lang-translation.git src/shared/l
 ```
 
 ### 2. Usage
-
-#### ⚛️ React
-```tsx
-import './shared/lang-translation/react/global-override.css';
-import { GoogleTranslate } from './shared/lang-translation/react/GoogleTranslate';
-
-<GoogleTranslate />
-```
-
-#### 🅰️ Angular
-```scss
-// in styles.scss:
-@import "./shared/lang-translation/angular/styles-override.scss";
-```
-```typescript
-// in component:
-import { GoogleTranslateComponent } from './shared/lang-translation/angular/google-translate.component';
-```
+* **HTML/CSS**: Link `src/shared/lang-translation/vanilla/google-translate.css` and `.js`.
+* **React**: Import from `./shared/lang-translation/react/GoogleTranslate`.
+* **Angular**: Import from `./shared/lang-translation/angular/google-translate.component`.
 
 ---
 

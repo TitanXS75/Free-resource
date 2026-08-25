@@ -266,8 +266,12 @@ export const SUPPORTED_LANGUAGES = [
 ```
 Lang-translation/
 ├── package.json                        <-- NPM Git package definition & export maps
-├── INTEGRATION.md                      <-- Step-by-step setup for NPM & Submodules
+├── INTEGRATION.md                      <-- Step-by-step setup for NPM, Submodules & HTML
 ├── README.md                           <-- Architecture & technical breakdown
+├── vanilla/
+│   ├── index.html                      <-- Standalone HTML/CSS demo webpage
+│   ├── google-translate.js             <-- Pure Vanilla JS drop-in translator module
+│   └── google-translate.css            <-- Pure CSS suppression & modal styling
 ├── angular/
 │   ├── google-translate.component.ts   <-- Angular Standalone Component Logic
 │   ├── google-translate.component.html <-- Custom Settings Modal Template

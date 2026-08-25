@@ -1,7 +1,7 @@
 {
   "name": "lang-translation",
   "version": "1.0.0",
-  "description": "100% Free, zero-branding, client-side translation system for React, Next.js, and Angular",
+  "description": "100% Free, zero-branding, client-side translation system for HTML/CSS, React, Next.js, and Angular",
   "author": "TitanXS75",
   "license": "MIT",
   "repository": {
@@ -16,6 +16,8 @@
     "google-translate",
     "translation",
     "i18n",
+    "vanilla-js",
+    "html-css",
     "react",
     "nextjs",
     "angular",
@@ -40,9 +42,12 @@
     "./react/styles.css": "./react/global-override.css",
     "./styles.css": "./react/global-override.css",
     "./angular": "./angular/google-translate.component.ts",
-    "./angular/styles.scss": "./angular/styles-override.scss"
+    "./angular/styles.scss": "./angular/styles-override.scss",
+    "./vanilla/js": "./vanilla/google-translate.js",
+    "./vanilla/css": "./vanilla/google-translate.css"
   },
   "files": [
+    "vanilla",
     "react",
     "angular",
     "README.md",

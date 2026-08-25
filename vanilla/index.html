@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Google Language Translation - HTML/CSS Demo</title>
+  
+  <!-- 1. Include Translator CSS -->
+  <link rel="stylesheet" href="./google-translate.css">
+
+  <style>
+    /* Demo Page Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 32px;
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+    .hero {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .hero h1 {
+      font-size: 2.75rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      color: #ffffff;
+    }
+    .hero p {
+      font-size: 1.15rem;
+      color: #94a3b8;
+      max-width: 650px;
+      margin: 0 auto 24px;
+      line-height: 1.6;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 32px;
+    }
+    .feature-card {
+      background: #1e293b;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 24px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(96, 165, 250, 0.4);
+    }
+    .feature-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: #38bdf8;
+    }
+    .feature-card p {
+      color: #94a3b8;
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: #64748b;
+      font-size: 0.875rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header with Language Selector -->
+  <header>
+    <div class="brand">MyGlobalApp</div>
+    
+    <!-- 2. Language Trigger Element -->
+    <div id="google-translate-widget"></div>
+  </header>
+
+  <!-- Main Content (Will be translated in real-time) -->
+  <main>
+    <section class="hero">
+      <h1>Instant Free Multi-Language Translation</h1>
+      <p>
+        Experience client-side DOM translation without API keys, credit cards, or ugly Google toolbars and banners. Clean, fast, and 100% free forever.
+      </p>
+    </section>
+
+    <div class="grid">
+      <div class="feature-card">
+        <h3>⚡ Real-Time DOM Translation</h3>
+        <p>Translates all headings, paragraphs, and content instantaneously across your entire webpage.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🚫 Zero Google Banners</h3>
+        <p>Completely suppresses the standard Google Translate top frame, sidebars, and hover tooltips.</p>
+      </div>
+      <div class="feature-card">
+        <h3>💾 Persistent Choice</h3>
+        <p>Saves the user's selected language in cookies so preferences stay active across page navigation.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2026 MyGlobalApp. Built with Free Language Translation.</p>
+  </footer>
+
+  <!-- 3. Include Translator Script (Auto-initializes #google-translate-widget) -->
+  <script src="./google-translate.js"></script>
+
+</body>
+</html>

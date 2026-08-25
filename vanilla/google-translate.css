@@ -1,0 +1,338 @@
+/* =============================================================================
+   Google Translate Vanilla CSS: Global Suppression + Modern Modal UI
+   ============================================================================= */
+
+/* 1. Reset Body Offset & Suppress Google Banners/Popups/Frames */
+body {
+  top: 0 !important;
+  position: static !important;
+}
+
+.goog-te-banner-frame,
+iframe.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+.goog-te-ftab-frame,
+iframe.goog-te-ftab-frame,
+.goog-te-ftab,
+.goog-te-balloon-frame,
+iframe.goog-te-balloon-frame,
+#goog-gt-tt,
+.goog-tooltip,
+.goog-tooltip:hover,
+.goog-text-highlight,
+iframe[id^=":0.container"],
+iframe[id^=":1.container"],
+iframe[id^=":2.container"],
+.VIpgJd-ZVi9od-OR94Gd-PR6tc,
+iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf-ti6hGc,
+.VIpgJd-y606eb-L7AdLc,
+div.skiptranslate:not(.google-translate-container):not(.translate-widget),
+.goog-logo-link,
+.goog-logo-link:link,
+.goog-logo-link:visited,
+.goog-logo-link:hover,
+.goog-logo-link:active,
+.goog-te-gadget-icon {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+}
+
+#google_translate_hidden_element,
+.hidden-translate-engine {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+}
+
+/* 2. Trigger Button */
+.gt-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  backdrop-filter: blur(4px);
+}
+
+.gt-trigger-btn:hover {
+  background-color: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+.gt-trigger-btn:active {
+  transform: translateY(0);
+}
+
+.gt-trigger-icon {
+  width: 17px;
+  height: 17px;
+  color: #60a5fa;
+  flex-shrink: 0;
+}
+
+/* Light background variant */
+.gt-trigger-btn.light {
+  background-color: #f3f4f6;
+  border-color: #e5e7eb;
+  color: #1f2937;
+}
+
+.gt-trigger-btn.light:hover {
+  background-color: #e5e7eb;
+  border-color: #d1d5db;
+}
+
+.gt-trigger-btn.light .gt-trigger-icon {
+  color: #2563eb;
+}
+
+/* 3. Modal Backdrop & Dialog */
+.gt-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-out;
+}
+
+.gt-modal-backdrop.gt-show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.gt-modal-card {
+  background: #ffffff;
+  color: #0f172a;
+  width: 100%;
+  max-width: 620px;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  transform: scale(0.95);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.gt-modal-backdrop.gt-show .gt-modal-card {
+  transform: scale(1);
+}
+
+/* 4. Modal Header */
+.gt-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 24px 14px;
+}
+
+.gt-header-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.gt-header-subtitle {
+  font-size: 13px;
+  color: #64748b;
+  margin: 3px 0 0;
+}
+
+.gt-close-btn {
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  color: #94a3b8;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.gt-close-btn:hover {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+.gt-close-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* 5. Modal Body */
+.gt-modal-body {
+  padding: 10px 24px 20px;
+  overflow-y: auto;
+  max-height: 70vh;
+}
+
+.gt-section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.gt-section-icon {
+  width: 18px;
+  height: 18px;
+  color: #2563eb;
+}
+
+.gt-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+  margin: 0;
+}
+
+/* 6. Language Cards Grid */
+.gt-languages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 580px) {
+  .gt-languages-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.gt-lang-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  background-color: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  user-select: none;
+  font-family: inherit;
+}
+
+.gt-lang-card:hover {
+  border-color: #cbd5e1;
+  background-color: #f8fafc;
+  transform: translateY(-1px);
+}
+
+.gt-lang-card.selected {
+  border-color: #2563eb;
+  background-color: #eff6ff;
+}
+
+.gt-card-main-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gt-country-badge {
+  font-size: 10px;
+  font-weight: 700;
+  color: #64748b;
+  background-color: #f1f5f9;
+  border-radius: 4px;
+  padding: 1px 4px;
+  letter-spacing: 0.5px;
+}
+
+.gt-lang-card.selected .gt-country-badge {
+  color: #2563eb;
+  background-color: #dbeafe;
+}
+
+.gt-lang-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.gt-lang-card.selected .gt-lang-name {
+  color: #1d4ed8;
+}
+
+.gt-native-name {
+  font-size: 12px;
+  color: #64748b;
+  margin-left: 2px;
+}
+
+.gt-lang-card.selected .gt-native-name {
+  color: #3b82f6;
+}
+
+/* 7. Modal Footer */
+.gt-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 14px 24px;
+  border-top: 1px solid #f1f5f9;
+  background-color: #f8fafc;
+}
+
+.gt-apply-btn {
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 18px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.gt-apply-btn:hover {
+  background-color: #1d4ed8;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+.gt-apply-btn:active {
+  transform: scale(0.98);
+}

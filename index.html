@@ -3,13 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lang-Translation - Free Enterprise-Grade Client-Side Translation</title>
+  <title>Lang-Translation - Free Client-Side Google Translation</title>
   <meta name="description" content="100% Free client-side Google Translation system with zero branding, custom modal UI, and instant multi-language support.">
-  <link rel="icon" type="image/jpeg" href="./logo.jpg">
+  <link rel="icon" type="image/png" href="logo.png">
 
-  <!-- Core Styles -->
-  <link rel="stylesheet" href="./neo-brutalism.css">
-  <link rel="stylesheet" href="./vanilla/google-translate.css">
+  <!-- Critical inline fallback to prevent white flash / unstyled paint -->
+  <style>
+    html, body {
+      background-color: #0b0f19 !important;
+      color: #f8fafc !important;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+  </style>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="vanilla/google-translate.css">
 </head>
 <body>
 
@@ -22,8 +38,8 @@
   <!-- Navbar -->
   <header class="navbar">
     <div class="container nav-inner">
-      <a href="./index.html" class="brand-wrapper">
-        <img src="./logo.jpg" alt="Lang-Translation Logo" class="brand-logo-img notranslate" translate="no">
+      <a href="index.html" class="brand-wrapper">
+        <img src="logo.png" alt="Lang-Translation Logo" class="brand-logo-img notranslate" translate="no">
         <span>Lang-Translation</span>
       </a>
 
@@ -31,7 +47,7 @@
         <li><a href="#demo" class="nav-item-link">Live Demo</a></li>
         <li><a href="#features" class="nav-item-link">Features</a></li>
         <li><a href="#comparison" class="nav-item-link">Comparison</a></li>
-        <li><a href="./integration.html" class="nav-item-link active">Integration Hub</a></li>
+        <li><a href="integration.html" class="nav-item-link active">Integration Hub</a></li>
       </ul>
 
       <div style="display: flex; align-items: center; gap: 14px;">
@@ -62,7 +78,7 @@
           <button type="button" id="trigger-live-modal" class="btn-modern btn-primary">
             Open Language Modal
           </button>
-          <a href="./integration.html" class="btn-modern btn-secondary">
+          <a href="integration.html" class="btn-modern btn-secondary">
             Integration Guide
           </a>
         </div>
@@ -230,14 +246,14 @@
   </section>
 
   <!-- CTA Section -->
-  <section class="section-wrapper" style="text-align: center; background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.12), transparent 70%);">
+  <section class="section-wrapper" style="text-align: center; background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.12), transparent 70%);">
     <div class="container">
       <h2 class="section-title-large" style="font-size: 2.75rem; margin-bottom: 16px;">Ready to Add to Your Project?</h2>
       <p class="section-desc-muted" style="max-width: 600px; margin: 0 auto 32px;">
         Head over to our Integration Hub to copy pre-made commands for React, Next.js, Angular, or Vanilla HTML in 30 seconds.
       </p>
       <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
-        <a href="./integration.html" class="btn-modern btn-primary" style="font-size: 16px; padding: 14px 28px;">
+        <a href="integration.html" class="btn-modern btn-primary" style="font-size: 16px; padding: 14px 28px;">
           Open Integration Hub
         </a>
         <a href="https://github.com/TitanXS75/Lang-translation" target="_blank" rel="noopener noreferrer" class="btn-modern btn-secondary" style="font-size: 16px; padding: 14px 28px;">
@@ -251,7 +267,7 @@
   <footer class="footer-wrapper">
     <div class="container footer-inner-content">
       <div class="brand-wrapper">
-        <img src="./logo.jpg" alt="Lang-Translation Logo" class="brand-logo-img notranslate" translate="no" style="width: 28px; height: 28px; border-radius: 8px;">
+        <img src="logo.png" alt="Lang-Translation Logo" class="brand-logo-img notranslate" translate="no" style="width: 28px; height: 28px; border-radius: 8px;">
         <span>Lang-Translation</span>
       </div>
       <div>
@@ -264,7 +280,7 @@
   <div id="toast-notice" class="toast-notice notranslate" translate="no">Copied to clipboard!</div>
 
   <!-- Scripts -->
-  <script src="./vanilla/google-translate.js"></script>
-  <script src="./site.js"></script>
+  <script src="vanilla/google-translate.js"></script>
+  <script src="site.js"></script>
 </body>
 </html>

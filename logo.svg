@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- Minimalist Globe -->
+  <circle cx="45" cy="55" r="35" stroke="#38bdf8" stroke-width="5"/>
+  <ellipse cx="45" cy="55" rx="16" ry="35" stroke="#38bdf8" stroke-width="4.5"/>
+  <line x1="10" y1="55" x2="80" y2="55" stroke="#38bdf8" stroke-width="4.5"/>
+  <line x1="18" y1="38" x2="72" y2="38" stroke="#38bdf8" stroke-width="4"/>
+  <line x1="18" y1="72" x2="72" y2="72" stroke="#38bdf8" stroke-width="4"/>
+  
+  <!-- Speech Bubble Overlay -->
+  <path d="M60 14 C48 14 38 23 38 34 C38 40 41 45 46 48 L44 59 L54 53 C56 54 58 54 60 54 C72 54 82 45 82 34 C82 23 72 14 60 14 Z" fill="#0f172a" stroke="#ffffff" stroke-width="5" stroke-linejoin="round"/>
+</svg>

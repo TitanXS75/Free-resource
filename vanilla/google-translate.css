@@ -29,10 +29,6 @@ iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
 .VIpgJd-ZVi9od-aZ2wEe-wOHMyf-ti6hGc,
 .VIpgJd-y606eb-L7AdLc,
 .goog-logo-link,
-.goog-logo-link:link,
-.goog-logo-link:visited,
-.goog-logo-link:hover,
-.goog-logo-link:active,
 .goog-te-gadget-icon {
   display: none !important;
   visibility: hidden !important;
@@ -62,9 +58,11 @@ iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
 .gt-trigger-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   height: 38px;
-  padding: 0 14px;
+  padding: 0 16px;
+  box-sizing: border-box;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 10px;
@@ -73,6 +71,7 @@ iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
   font-family: inherit;
   font-size: 13.5px;
   font-weight: 600;
+  line-height: 1;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   user-select: none;
   backdrop-filter: blur(8px);
@@ -95,18 +94,18 @@ iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
   flex-shrink: 0;
 }
 
-/* 3. Modal Backdrop & Dialog */
+/* 3. Modal Backdrop & Dialog (Wide Horizontal Layout with No Scrollbars) */
 .gt-modal-backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(5, 8, 15, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(5, 8, 15, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 999999;
-  padding: 16px;
+  padding: 20px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease-out;
@@ -121,11 +120,11 @@ iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
   background: #111827;
   color: #f8fafc;
   width: 100%;
-  max-width: 620px;
-  border-radius: 18px;
+  max-width: 860px; /* Horizontally spacious */
+  border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
-  overflow: hidden;
+  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  overflow: visible;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -143,12 +142,12 @@ iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 22px 24px 14px;
+  padding: 24px 28px 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .gt-header-title {
-  font-size: 20px;
+  font-size: 21px;
   font-weight: 700;
   color: #ffffff;
   margin: 0;
@@ -156,7 +155,7 @@ iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
 }
 
 .gt-header-subtitle {
-  font-size: 13px;
+  font-size: 13.5px;
   color: #94a3b8;
   margin: 4px 0 0;
 }
@@ -164,7 +163,7 @@ iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
 .gt-close-btn {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 6px;
+  padding: 8px;
   cursor: pointer;
   color: #94a3b8;
   border-radius: 8px;
@@ -175,7 +174,7 @@ iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
 }
 
 .gt-close-btn:hover {
-  background-color: rgba(255, 255, 255, 0.12);
+  background-color: rgba(255, 255, 255, 0.14);
   color: #ffffff;
 }
 
@@ -184,38 +183,49 @@ iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
   height: 18px;
 }
 
-/* 5. Modal Body */
+/* 5. Modal Body (Clean, No Scrollbar) */
 .gt-modal-body {
-  padding: 18px 24px 22px;
-  overflow-y: auto;
-  max-height: 65vh;
+  padding: 20px 28px 24px;
+  overflow: visible;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.gt-modal-body::-webkit-scrollbar {
+  display: none;
 }
 
 .gt-section-header {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .gt-section-icon {
-  width: 17px;
-  height: 17px;
+  width: 18px;
+  height: 18px;
   color: #38bdf8;
 }
 
 .gt-section-title {
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 600;
   color: #cbd5e1;
   margin: 0;
 }
 
-/* 6. Language Cards Grid */
+/* 6. Language Cards Grid - 4 Columns */
 .gt-languages-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 820px) {
+  .gt-languages-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 580px) {
@@ -228,10 +238,10 @@ iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
   display: flex;
   flex-direction: column;
   gap: 3px;
-  padding: 11px 13px;
+  padding: 12px 14px;
   background-color: #182234;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
   text-align: left;
   transition: all 0.15s ease;
@@ -248,7 +258,7 @@ iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
 .gt-lang-card.selected {
   border-color: #38bdf8;
   background-color: rgba(56, 189, 248, 0.12);
-  box-shadow: 0 0 16px rgba(56, 189, 248, 0.2);
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.22);
 }
 
 .gt-card-main-row {
@@ -258,7 +268,7 @@ iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
 }
 
 .gt-country-badge {
-  font-size: 10px;
+  font-size: 10.5px;
   font-weight: 700;
   color: #94a3b8;
   background-color: rgba(255, 255, 255, 0.08);
@@ -296,9 +306,11 @@ iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
 .gt-modal-footer {
   display: flex;
   justify-content: flex-end;
-  padding: 16px 24px;
+  padding: 18px 28px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   background-color: #0d131f;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .gt-apply-btn {
@@ -306,7 +318,7 @@ iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
   color: #ffffff;
   border: none;
   border-radius: 10px;
-  padding: 10px 22px;
+  padding: 11px 24px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;

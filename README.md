@@ -6,7 +6,7 @@
 ---
 
 ## 📌 Table of Contents
-0. [⚡ Quick Installation (NPM / Submodule)](#-quick-installation)
+0. [Quick Installation (NPM / Submodule)](#-quick-installation)
 1. [Core Features](#-core-features)
 2. [How It Works (Under the Hood)](#-how-it-works-under-the-hood)
 3. [The Secrets: Suppressing Google UI & Unwanted Sidebars](#-the-secrets-suppressing-google-ui--unwanted-sidebars)

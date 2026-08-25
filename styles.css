@@ -38,6 +38,27 @@
   padding: 0;
 }
 
+/* Modern Website Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #080c14;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 9999px;
+  border: 2px solid #080c14;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #38bdf8;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1e293b #080c14;
+}
+
 html {
   scroll-behavior: smooth;
   background-color: var(--bg-page);
@@ -194,11 +215,14 @@ iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 22px;
+  height: 38px;
+  padding: 0 18px;
+  box-sizing: border-box;
   border-radius: 10px;
   font-family: var(--font-main);
-  font-size: 14.5px;
+  font-size: 13.5px;
   font-weight: 600;
+  line-height: 1;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);

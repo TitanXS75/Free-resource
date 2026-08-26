@@ -41,15 +41,30 @@
         <li><a href="integration.html" class="nav-item-link active">Integration Hub</a></li>
       </ul>
 
-      <div style="display: flex; align-items: center; gap: 14px;">
+      <div class="nav-right-cluster">
         <!-- Embedded Language Widget -->
         <div id="google-translate-widget"></div>
 
-        <a href="https://github.com/TitanXS75/Lang-translation" target="_blank" rel="noopener noreferrer" class="btn-modern btn-secondary">
+        <a href="https://github.com/TitanXS75/Lang-translation" target="_blank" rel="noopener noreferrer" class="btn-modern btn-secondary nav-github-btn">
           GitHub
         </a>
+
+        <button type="button" id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </div>
+
+    <!-- Mobile Slide-down Menu -->
+    <nav id="mobile-nav-menu" class="mobile-nav-menu" aria-label="Mobile navigation">
+      <a href="index.html" class="mobile-nav-link">Home</a>
+      <a href="index.html#demo" class="mobile-nav-link">Live Demo</a>
+      <a href="index.html#features" class="mobile-nav-link">Features</a>
+      <a href="integration.html" class="mobile-nav-link active">Integration Hub</a>
+      <a href="https://github.com/TitanXS75/Lang-translation" target="_blank" rel="noopener noreferrer" class="mobile-nav-link">GitHub ↗</a>
+    </nav>
   </header>
 
   <!-- Integration Header -->

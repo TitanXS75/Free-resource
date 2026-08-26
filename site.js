@@ -64,7 +64,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 3. Interactive Translate Trigger Simulator
+  // 3. Mobile Hamburger Menu
+  const menuToggle = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-nav-menu');
+
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      menuToggle.classList.toggle('open', isOpen);
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+    });
+
+    // Close the menu after tapping a link (smooth-scroll anchors included)
+    mobileMenu.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        menuToggle.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  // 4. Interactive Translate Trigger Simulator
   const liveDemoTrigger = document.getElementById('trigger-live-modal');
   if (liveDemoTrigger) {
     liveDemoTrigger.addEventListener('click', () => {

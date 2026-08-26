@@ -143,8 +143,7 @@
         new window.google.translate.TranslateElement(
           {
             pageLanguage: 'en',
-            autoDisplay: false,
-            layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE
+            autoDisplay: false
           },
           'google_translate_hidden_element'
         );

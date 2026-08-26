@@ -66,7 +66,6 @@ export class GoogleTranslateComponent implements OnInit {
           {
             pageLanguage: 'en',
             includedLanguages: this.languages.map((l) => l.code).join(','),
-            layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
             autoDisplay: false,
           },
           'google_translate_hidden_element'
@@ -85,7 +84,6 @@ export class GoogleTranslateComponent implements OnInit {
           {
             pageLanguage: 'en',
             includedLanguages: this.languages.map((l) => l.code).join(','),
-            layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
             autoDisplay: false,
           },
           'google_translate_hidden_element'

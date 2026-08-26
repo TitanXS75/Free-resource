@@ -41,7 +41,6 @@
       <a href="index.html" class="brand-wrapper">
         <div class="brand-title-group">
           <span class="brand-title">FreeResource</span>
-          <span class="brand-badge">ZERO-API-COST • CLIENT-SIDE</span>
         </div>
       </a>
 
@@ -49,7 +48,6 @@
         <li><a href="#showcase">Showcase</a></li>
         <li><a href="#comparison">Cost vs Cloud APIs</a></li>
         <li><a href="#components">Components</a></li>
-        <li><a href="#integration">Integration</a></li>
       </ul>
 
       <div class="nav-right-cluster">
@@ -117,7 +115,7 @@
       <div class="section-header-center">
         <div class="section-tag">Interactive Component Playground</div>
         <h2 class="section-heading">Test the Free Components Live</h2>
-        <p class="section-desc">Toggle between components below to test their real-time performance and view integration code.</p>
+        <p class="section-desc">Toggle between components below to test real-time performance.</p>
       </div>
 
       <!-- Apple-Style Segmented Control Tabs -->
@@ -138,156 +136,66 @@
       <!-- TAB 1: Face Recognition Component Showcase     -->
       <!-- ============================================== -->
       <div id="tab-face-rec" class="showcase-panel active" role="tabpanel">
-        <div class="showcase-grid-2col">
-          
-          <!-- Left: Live Mini Interactive Scanner & Highlights -->
-          <div class="showcase-card">
-            <div class="showcase-card-header">
-              <div class="card-title-group">
-                <h3>On-Device Face Biometrics</h3>
-                <p>Neural face detection, landmarks &amp; 128-D vector matching</p>
+        <div class="showcase-card showcase-featured-card">
+          <div class="showcase-card-header">
+            <div class="card-title-group">
+              <h3>On-Device Face Biometrics</h3>
+              <p>Neural face detection, landmarks &amp; 128-D vector matching</p>
+            </div>
+            <a href="Face Recognition/examples/vanilla-demo/index.html" target="_blank" class="card-action-link">
+              <span>Launch Studio</span>
+            </a>
+          </div>
+
+          <div class="showcase-featured-layout">
+            <!-- Left: Mini Camera Scanner -->
+            <div class="featured-media-col">
+              <div class="mini-demo-wrapper">
+                <div class="demo-camera-box">
+                  <video id="mini-video" autoplay muted playsinline></video>
+                  <canvas id="mini-canvas"></canvas>
+                </div>
+                <div class="demo-controls-bar">
+                  <button type="button" id="start-mini-cam-btn" class="btn-demo-action primary">
+                    <span>Launch Mini Scanner</span>
+                  </button>
+                </div>
               </div>
-              <a href="Face Recognition/examples/vanilla-demo/index.html" target="_blank" class="card-action-link">
-                <span>Launch Studio</span>
-              </a>
+              <p id="mini-cam-status" style="font-size: 12px; color: var(--text-tertiary); font-family: var(--font-mono); margin-top: 10px;">
+                Ready to test on-device neural face detection.
+              </p>
             </div>
 
-            <!-- Mini Live Camera Scanner Sandbox -->
-            <div class="mini-demo-wrapper">
-              <div class="demo-camera-box">
-                <video id="mini-video" autoplay muted playsinline></video>
-                <canvas id="mini-canvas"></canvas>
+            <!-- Right: Highlights & Action -->
+            <div class="featured-info-col">
+              <div class="feature-bullet-list">
+                <div class="feature-bullet-item">
+                  <div class="bullet-content">
+                    <strong>60 FPS Client-Side Execution</strong>
+                    <p>Runs TinyFaceDetector + FaceLandmark68Net locally via WebGL without sending frames to the cloud.</p>
+                  </div>
+                </div>
+                <div class="feature-bullet-item">
+                  <div class="bullet-content">
+                    <strong>Zero-Leakage Biometric Security</strong>
+                    <p>Generates 128-D Euclidean vector descriptors for local identity matching.</p>
+                  </div>
+                </div>
+                <div class="feature-bullet-item">
+                  <div class="bullet-content">
+                    <strong>Offline &amp; LocalStorage Ready</strong>
+                    <p>Includes built-in vector storage adapters for LocalStorage, SQLite, Supabase, or REST.</p>
+                  </div>
+                </div>
               </div>
-              <div class="demo-controls-bar">
-                <button type="button" id="start-mini-cam-btn" class="btn-demo-action primary">
-                  <span>Launch Mini Scanner</span>
-                </button>
-              </div>
-            </div>
-            <p id="mini-cam-status" style="font-size: 12px; color: var(--text-tertiary); font-family: var(--font-mono); margin-bottom: 12px;">
-              Ready to test on-device neural face detection.
-            </p>
 
-            <!-- Feature bullets -->
-            <div class="feature-bullet-list">
-              <div class="feature-bullet-item">
-                <div class="bullet-content">
-                  <strong>60 FPS Client-Side Execution</strong>
-                  <p>Runs TinyFaceDetector + FaceLandmark68Net locally via WebGL without sending frames to the cloud.</p>
-                </div>
-              </div>
-              <div class="feature-bullet-item">
-                <div class="bullet-content">
-                  <strong>Zero-Leakage Biometric Security</strong>
-                  <p>Generates 128-D Euclidean vector descriptors for local identity matching.</p>
-                </div>
-              </div>
-              <div class="feature-bullet-item">
-                <div class="bullet-content">
-                  <strong>Offline &amp; LocalStorage Ready</strong>
-                  <p>Includes built-in vector storage adapters for LocalStorage, SQLite, Supabase, or REST.</p>
-                </div>
+              <div class="featured-action-row">
+                <a href="Face Recognition/examples/vanilla-demo/index.html" class="btn-hero-primary" style="padding: 11px 26px; font-size: 14px;">
+                  <span>Open Live Biometric Studio</span>
+                </a>
               </div>
             </div>
           </div>
-
-          <!-- Right: Code Explorer -->
-          <div class="showcase-card">
-            <div class="showcase-card-header">
-              <div class="card-title-group">
-                <h3>Integration Code</h3>
-                <p>Drop into any web project in seconds</p>
-              </div>
-            </div>
-
-            <div class="code-preview-box">
-              <div class="code-header-bar">
-                <div class="framework-pills">
-                  <button type="button" class="code-lang-pill active" data-snippet="vanilla">Vanilla JS</button>
-                  <button type="button" class="code-lang-pill" data-snippet="react">React Hook</button>
-                  <button type="button" class="code-lang-pill" data-snippet="angular">Angular</button>
-                </div>
-                <button type="button" class="btn-copy-code" data-copy-target="code-face-current">
-                  <span>Copy</span>
-                </button>
-              </div>
-
-              <div class="code-content-block">
-                <!-- Vanilla JS Snippet -->
-                <div class="snippet-block snippet-vanilla" id="code-face-current">
-<pre><code>// 1. Initialize Neural Models
-await Promise.all([
-  faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
-  faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
-  faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
-]);
-
-// 2. Detect Face & Extract 128-D Biometric Vector
-const detection = await faceapi
-  .detectSingleFace(videoElement, new faceapi.TinyFaceDetectorOptions())
-  .withFaceLandmarks()
-  .withFaceDescriptor();
-
-// 3. Match against local enrolled faces
-const matcher = new faceapi.FaceMatcher(enrolledDescriptors, 0.45);
-const bestMatch = matcher.findBestMatch(detection.descriptor);
-console.log(`Identified: ${bestMatch.label}`);</code></pre>
-                </div>
-
-                <!-- React Snippet -->
-                <div class="snippet-block snippet-react" style="display:none;">
-<pre><code>import { useFaceRecognition } from './useFaceRecognition';
-
-export function FaceScannerComponent() {
-  const { videoRef, status, recognizedUser } = useFaceRecognition({
-    modelsUri: '/models',
-    minConfidence: 0.70,
-  });
-
-  return (
-    &lt;div className="scanner-card"&gt;
-      &lt;video ref={videoRef} autoPlay muted playsInline /&gt;
-      &lt;p&gt;Status: {status}&lt;/p&gt;
-      &lt;p&gt;User: {recognizedUser?.label || 'Searching...'}&lt;/p&gt;
-    &lt;/div&gt;
-  );
-}</code></pre>
-                </div>
-
-                <!-- Angular Snippet -->
-                <div class="snippet-block snippet-angular" style="display:none;">
-<pre><code>import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { FaceEngineService } from './face-engine.service';
-
-@Component({
-  selector: 'app-face-scanner',
-  template: `
-    &lt;video #video autoplay muted playsinline&gt;&lt;/video&gt;
-    &lt;p&gt;Match: {{ currentMatch() }}&lt;/p&gt;
-  `
-})
-export class FaceScannerComponent implements OnInit {
-  @ViewChild('video') videoEl!: ElementRef&lt;HTMLVideoElement&gt;;
-  currentMatch = signal&lt;string&gt;('Searching');
-
-  constructor(private faceEngine: FaceEngineService) {}
-
-  async ngOnInit() {
-    await this.faceEngine.loadModels('/models');
-    await this.faceEngine.startCamera(this.videoEl.nativeElement);
-  }
-}</code></pre>
-                </div>
-              </div>
-            </div>
-
-            <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
-              <a href="Face Recognition/README.md" target="_blank" class="card-action-link">
-                <span>View Full Face Recognition Docs →</span>
-              </a>
-            </div>
-          </div>
-
         </div>
       </div>
 
@@ -295,143 +203,60 @@ export class FaceScannerComponent implements OnInit {
       <!-- TAB 2: Zero-Branding Translation Component     -->
       <!-- ============================================== -->
       <div id="tab-translation" class="showcase-panel" role="tabpanel">
-        <div class="showcase-grid-2col">
-          
-          <!-- Left: Live Interactive Translation Demo -->
-          <div class="showcase-card">
-            <div class="showcase-card-header">
-              <div class="card-title-group">
-                <h3>Zero-Branding Translation Widget</h3>
-                <p>Client-side translation with zero reload &amp; custom Apple modal</p>
-              </div>
-              <a href="Language Translation/index.html" target="_blank" class="card-action-link">
-                <span>Launch Hub</span>
-              </a>
+        <div class="showcase-card showcase-featured-card">
+          <div class="showcase-card-header">
+            <div class="card-title-group">
+              <h3>Zero-Branding Translation Widget</h3>
+              <p>Client-side translation with zero reload &amp; custom Apple modal</p>
             </div>
+          </div>
 
-            <!-- Live In-Place Translation Demonstration Card -->
-            <div class="translation-test-container">
-              <div class="translation-sample-text">
-                <p>
-                  <strong>Global Accessibility:</strong> FreeResource provides instant multi-language translation without charging per-character API fees or displaying intrusive Google banners.
-                </p>
-                <p style="margin-top: 10px; font-size: 14px; color: var(--text-secondary);">
-                  Switch languages using the button below or the navbar widget. Notice how the page translates smoothly with <strong>zero page reload</strong> and <strong>zero tab loading spinner</strong>.
-                </p>
-              </div>
+          <div class="showcase-featured-layout">
+            <!-- Left: Translation Test Interactive Box -->
+            <div class="featured-media-col">
+              <div class="translation-test-container">
+                <div class="translation-sample-text">
+                  <p>
+                    <strong>Global Accessibility:</strong> FreeResource provides instant multi-language translation without charging per-character API fees or displaying intrusive Google banners.
+                  </p>
+                  <p style="margin-top: 10px; font-size: 14px; color: var(--text-secondary);">
+                    Switch languages using the button below or the navbar widget. The page translates smoothly with <strong>zero page reload</strong>.
+                  </p>
+                </div>
 
-              <div class="translation-interactive-bar">
-                <button type="button" id="test-language-modal-btn" class="btn-demo-action primary">
-                  <span>Open Language Modal</span>
-                </button>
-                <span class="translation-hint">Supports 16+ Global Languages</span>
+                <div class="translation-interactive-bar">
+                  <button type="button" id="test-language-modal-btn" class="btn-demo-action primary">
+                    <span>Open Language Modal</span>
+                  </button>
+                  <span class="translation-hint">Supports 16+ Global Languages</span>
+                </div>
               </div>
             </div>
 
-            <!-- Feature bullets -->
-            <div class="feature-bullet-list">
-              <div class="feature-bullet-item">
-                <div class="bullet-content">
-                  <strong>Zero Page Reload &amp; Zero Tab Spinner</strong>
-                  <p>Direct DOM combo event dispatching allows instant translation back and forth without reloading.</p>
+            <!-- Right: Highlights -->
+            <div class="featured-info-col">
+              <div class="feature-bullet-list">
+                <div class="feature-bullet-item">
+                  <div class="bullet-content">
+                    <strong>Zero Page Reload &amp; Zero Tab Spinner</strong>
+                    <p>Direct DOM combo event dispatching allows instant translation back and forth without reloading.</p>
+                  </div>
                 </div>
-              </div>
-              <div class="feature-bullet-item">
-                <div class="bullet-content">
-                  <strong>Zero Google Branding or Iframes</strong>
-                  <p>All Google headers, top banner frames, tooltips, and footer credits are completely suppressed.</p>
+                <div class="feature-bullet-item">
+                  <div class="bullet-content">
+                    <strong>Zero Google Branding or Iframes</strong>
+                    <p>All Google headers, top banner frames, tooltips, and footer credits are completely suppressed.</p>
+                  </div>
                 </div>
-              </div>
-              <div class="feature-bullet-item">
-                <div class="bullet-content">
-                  <strong>Smart Cookie Persistence</strong>
-                  <p>Remembers user language selection automatically across page visits.</p>
+                <div class="feature-bullet-item">
+                  <div class="bullet-content">
+                    <strong>Smart Cookie Persistence</strong>
+                    <p>Remembers user language selection automatically across page visits.</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <!-- Right: Code Explorer -->
-          <div class="showcase-card">
-            <div class="showcase-card-header">
-              <div class="card-title-group">
-                <h3>Integration Code</h3>
-                <p>Embed the translation widget with 2 lines of code</p>
-              </div>
-            </div>
-
-            <div class="code-preview-box">
-              <div class="code-header-bar">
-                <div class="framework-pills">
-                  <button type="button" class="code-lang-pill active" data-snippet="vanilla-trans">Vanilla JS</button>
-                  <button type="button" class="code-lang-pill" data-snippet="react-trans">React JSX</button>
-                  <button type="button" class="code-lang-pill" data-snippet="angular-trans">Angular</button>
-                </div>
-                <button type="button" class="btn-copy-code" data-copy-target="code-trans-current">
-                  <span>Copy</span>
-                </button>
-              </div>
-
-              <div class="code-content-block">
-                <!-- Vanilla JS Snippet -->
-                <div class="snippet-block snippet-vanilla-trans" id="code-trans-current">
-<pre><code>&lt;!-- 1. Include CSS &amp; Container --&gt;
-&lt;link rel="stylesheet" href="google-translate.css"&gt;
-&lt;div id="google-translate-widget"&gt;&lt;/div&gt;
-
-&lt;!-- 2. Load Script &amp; Initialize --&gt;
-&lt;script src="google-translate.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-  window.initGoogleTranslate({
-    container: '#google-translate-widget',
-    theme: 'dark'
-  });
-&lt;/script&gt;</code></pre>
-                </div>
-
-                <!-- React Snippet -->
-                <div class="snippet-block snippet-react-trans" style="display:none;">
-<pre><code>import { GoogleTranslate } from './GoogleTranslate';
-import './global-override.css';
-
-export function Navbar() {
-  return (
-    &lt;header className="navbar"&gt;
-      &lt;div className="logo"&gt;My App&lt;/div&gt;
-      &lt;GoogleTranslate /&gt;
-    &lt;/header&gt;
-  );
-}</code></pre>
-                </div>
-
-                <!-- Angular Snippet -->
-                <div class="snippet-block snippet-angular-trans" style="display:none;">
-<pre><code>import { Component } from '@angular/core';
-import { GoogleTranslateComponent } from './google-translate.component';
-
-@Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [GoogleTranslateComponent],
-  template: `
-    &lt;nav&gt;
-      &lt;h1&gt;My Portal&lt;/h1&gt;
-      &lt;app-google-translate /&gt;
-    &lt;/nav&gt;
-  `
-})
-export class HeaderComponent {}</code></pre>
-                </div>
-              </div>
-            </div>
-
-            <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
-              <a href="Language Translation/README.md" target="_blank" class="card-action-link">
-                <span>View Full Translation Docs →</span>
-              </a>
-            </div>
-          </div>
-
         </div>
       </div>
 
@@ -527,11 +352,8 @@ export class HeaderComponent {}</code></pre>
             Self-hosted facial recognition, landmark geometry, and local vector descriptor database engine.
           </p>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="Face Recognition/examples/vanilla-demo/index.html" class="btn-hero-primary" style="padding: 8px 16px; font-size: 13px;">
+            <a href="Face Recognition/examples/vanilla-demo/index.html" class="btn-hero-primary" style="padding: 8px 18px; font-size: 13px;">
               <span>Launch Demo</span>
-            </a>
-            <a href="Face Recognition/README.md" class="btn-hero-secondary" style="padding: 8px 16px; font-size: 13px;">
-              <span>Read Docs</span>
             </a>
           </div>
         </div>
@@ -539,16 +361,16 @@ export class HeaderComponent {}</code></pre>
         <!-- Component 2 Card -->
         <div class="showcase-card">
           <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 6px;">Zero-Branding Language Translation</h3>
-          <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">
-            Free client-side Google Translation widget with suppressed banners, custom modal UI, and zero reload.
+          <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 14px;">
+            Client-side translation widget with suppressed banners, custom modal UI, and zero reload.
           </p>
+          <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.22); border-radius: var(--radius-sm); padding: 12px 14px; margin-bottom: 18px; font-size: 13px; color: #38bdf8; line-height: 1.5;">
+            <strong>Try it now:</strong> Switch the language using the widget in the navigation bar at the top of the page to experience live instant translation without any page reload.
+          </div>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="Language Translation/index.html" class="btn-hero-primary" style="padding: 8px 16px; font-size: 13px;">
-              <span>Launch Demo</span>
-            </a>
-            <a href="Language Translation/README.md" class="btn-hero-secondary" style="padding: 8px 16px; font-size: 13px;">
-              <span>Read Docs</span>
-            </a>
+            <button type="button" onclick="document.querySelector('.gt-trigger-btn')?.click()" class="btn-hero-primary" style="padding: 8px 18px; font-size: 13px; cursor: pointer;">
+              <span>Open Language Switcher</span>
+            </button>
           </div>
         </div>
       </div>
@@ -565,8 +387,7 @@ export class HeaderComponent {}</code></pre>
       <ul class="footer-links">
         <li><a href="#showcase">Showcase</a></li>
         <li><a href="#comparison">Pricing Comparison</a></li>
-        <li><a href="Face Recognition/README.md">Face Recognition</a></li>
-        <li><a href="Language Translation/README.md">Language Translation</a></li>
+        <li><a href="#components">Components</a></li>
         <li><a href="https://github.com/TitanXS75/Free-resource" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
       </ul>
       <p class="footer-copy">

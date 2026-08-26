@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeuralFace ID — Free Biometric Face Recognition Engine</title>
+  <meta name="description" content="100% Free, zero-API-cost client-side face recognition and biometric enrollment engine powered by TensorFlow.js and Face-API.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="face-api.min.js"></script>
+</head>
+<body>
+
+  <!-- Ambient Glow Background -->
+  <div class="ambient-glow"></div>
+
+  <!-- Apple-Style Nav Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <a href="../../../index.html" class="nav-back-link" title="Back to All Free Components">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+        <span>All Components</span>
+      </a>
+      <div class="header-divider"></div>
+      <div class="brand-info">
+        <div class="brand-title-row">
+          <span class="brand-icon">👤</span>
+          <h1 class="brand-name">NeuralFace ID</h1>
+          <span class="version-badge">v2.0 Pro</span>
+        </div>
+        <p class="brand-desc">Zero-API-Cost • 100% Client-Side Biometrics</p>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <!-- Neural Net Status Indicator -->
+      <div id="system-badge" class="system-status-pill loading">
+        <span class="status-dot"></span>
+        <span class="status-text">Loading Neural Weights...</span>
+      </div>
+
+      <!-- Sound Toggle -->
+      <button type="button" id="sound-toggle-btn" class="icon-btn active" title="Toggle Biometric Sound Effects">
+        <svg id="sound-on-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+        <svg id="sound-off-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+          <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+      </button>
+
+      <!-- GitHub Link -->
+      <a href="https://github.com/TitanXS75/Free-resource" target="_blank" rel="noopener noreferrer" class="github-pill-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+        </svg>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Viewport -->
+  <main class="app-layout">
+
+    <!-- Left Column: Biometric HUD Scanner -->
+    <section class="glass-panel scanner-panel">
+      
+      <!-- Panel Header -->
+      <div class="panel-header">
+        <div class="panel-header-left">
+          <div class="scanner-title-group">
+            <span class="live-recording-indicator"></span>
+            <h2>Biometric Optical Scanner</h2>
+          </div>
+          <span class="hud-sub">68-Point Facial Landmark Mapping</span>
+        </div>
+        <button id="toggle-camera-btn" class="glass-btn btn-compact">
+          <span class="btn-icon">📷</span>
+          <span class="btn-label">Pause Camera</span>
+        </button>
+      </div>
+
+      <!-- Segmented Mode Controller (Apple Style) -->
+      <div class="segmented-control" role="tablist">
+        <button type="button" id="mode-scan-btn" class="segment-btn active" role="tab" aria-selected="true">
+          <span class="segment-icon">🔍</span>
+          <span>Live Identification</span>
+        </button>
+        <button type="button" id="mode-register-btn" class="segment-btn" role="tab" aria-selected="false">
+          <span class="segment-icon">➕</span>
+          <span>Face Enrollment</span>
+        </button>
+      </div>
+
+      <!-- Video Scanner Container with Biometric Target HUD -->
+      <div class="video-hud-wrapper">
+        <video id="video" autoplay muted playsinline></video>
+        <canvas id="canvas"></canvas>
+
+        <!-- Futuristic Scanner Corner Reticles -->
+        <div class="reticle-corner top-left"></div>
+        <div class="reticle-corner top-right"></div>
+        <div class="reticle-corner bottom-left"></div>
+        <div class="reticle-corner bottom-right"></div>
+        <div class="scan-laser-line"></div>
+
+        <!-- Telemetry HUD Badges -->
+        <div class="hud-badge top-left-badge">
+          <span id="hud-fps">FPS: --</span>
+          <span class="telemetry-sep">•</span>
+          <span id="hud-latency">Latency: -- ms</span>
+        </div>
+
+        <div class="hud-badge top-right-badge">
+          <label class="toggle-mesh-label">
+            <input type="checkbox" id="toggle-landmarks-cb" checked>
+            <span>Landmark Mesh</span>
+          </label>
+        </div>
+
+        <!-- Camera Overlay Footer with Face Quality Meter -->
+        <div class="camera-bottom-hud">
+          <div class="hud-status-group">
+            <span id="detection-pulse" class="hud-pulse looking"></span>
+            <span id="detection-status" class="detection-status-text">Looking for human face...</span>
+          </div>
+
+          <div class="quality-meter-cluster">
+            <span class="quality-label">Alignment Quality:</span>
+            <div class="meter-track">
+              <div id="meter-fill" class="meter-fill-bar"></div>
+            </div>
+            <span id="quality-text" class="quality-value">0%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Match Result Card -->
+      <div id="live-recognition-result" class="match-result-card">
+        <div class="match-avatar-cluster">
+          <div id="match-avatar-circle" class="match-avatar-circle">
+            <span id="match-avatar-initials">--</span>
+          </div>
+        </div>
+        <div class="match-details">
+          <div class="match-status-row">
+            <span class="match-label-title">Identified Identity:</span>
+            <span id="rec-badge" class="rec-badge status-none">Searching</span>
+          </div>
+          <div class="match-name-row">
+            <span id="rec-name" class="rec-subject-name">Awaiting Subject</span>
+            <span id="rec-role-tag" class="rec-role-tag">--</span>
+          </div>
+        </div>
+        <div class="match-confidence-gauge">
+          <div class="confidence-circle">
+            <span id="rec-conf" class="confidence-pct">0%</span>
+            <span class="confidence-sub">Confidence</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Right Column: Registration & Database Hub -->
+    <aside class="sidebar-layout">
+      
+      <!-- Card 1: Face Registration Studio -->
+      <section class="glass-panel registration-panel" id="register-card">
+        <div class="panel-header">
+          <div class="panel-header-left">
+            <div class="scanner-title-group">
+              <span class="enroll-badge-icon">✨</span>
+              <h2>Enroll Biometric ID</h2>
+            </div>
+            <span class="hud-sub">Extract 128-D Neural Vector</span>
+          </div>
+        </div>
+
+        <div class="form-body">
+          <div class="glass-input-group">
+            <label for="person-name">Subject Full Name / Employee ID</label>
+            <div class="input-wrapper">
+              <span class="input-icon">👤</span>
+              <input type="text" id="person-name" placeholder="e.g. Steve Jobs (EMP-001)" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="glass-input-group">
+            <label for="person-display-name">Role / Title / Department</label>
+            <div class="input-wrapper">
+              <span class="input-icon">💼</span>
+              <input type="text" id="person-display-name" placeholder="e.g. Chief Executive Officer" autocomplete="off">
+            </div>
+          </div>
+
+          <button id="capture-face-btn" class="glass-btn btn-primary btn-large">
+            <span class="btn-icon">📸</span>
+            <span class="btn-label">Capture & Enroll Face</span>
+          </button>
+
+          <p id="register-hint" class="guidance-hint">
+            💡 Position subject centrally with face quality score <strong>&ge; 70%</strong> before capture.
+          </p>
+        </div>
+      </section>
+
+      <!-- Card 2: Biometric Database & Vector Registry -->
+      <section class="glass-panel database-panel">
+        <div class="panel-header">
+          <div class="panel-header-left">
+            <div class="scanner-title-group">
+              <span class="db-badge-icon">🗄️</span>
+              <h2>Vector Registry</h2>
+            </div>
+            <span class="hud-sub">Enrolled Profiles (<span id="face-count">0</span>)</span>
+          </div>
+          <div class="db-action-cluster">
+            <button id="export-db-btn" class="text-action-btn" title="Export Vector Database JSON">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Export</span>
+            </button>
+            <button id="import-db-btn" class="text-action-btn" title="Import Vector Database JSON">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              <span>Import</span>
+            </button>
+            <input type="file" id="import-file-input" accept=".json" style="display:none;">
+            <button id="clear-all-btn" class="text-action-btn btn-danger-text" title="Delete All Enrolled Profiles">
+              <span>Clear</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Enrolled List -->
+        <div id="registered-list" class="registered-faces-scroll">
+          <div class="empty-state">
+            <div class="empty-icon">📭</div>
+            <p class="empty-text">No biometric profiles enrolled yet.</p>
+            <span class="empty-sub">Enroll your face using the form above or import a profile JSON.</span>
+          </div>
+        </div>
+
+        <!-- Quick Demo Profiles Shortcut -->
+        <div class="quick-demo-footer">
+          <span class="quick-demo-title">⚡ Quick Test:</span>
+          <button type="button" id="load-samples-btn" class="demo-chip-btn">Load Demo Sample Profiles</button>
+        </div>
+      </section>
+
+    </aside>
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="app-toast" class="app-toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

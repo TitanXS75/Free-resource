@@ -71,7 +71,19 @@
       if (hidden) combo = hidden.querySelector('select');
     }
     if (combo) {
-      combo.value = langCode;
+      if (langCode === 'en') {
+        let defaultVal = '';
+        for (let i = 0; i < combo.options.length; i++) {
+          const val = combo.options[i].value;
+          if (val === '' || val === 'en' || val === 'auto') {
+            defaultVal = val;
+            break;
+          }
+        }
+        combo.value = defaultVal;
+      } else {
+        combo.value = langCode;
+      }
       combo.dispatchEvent(new Event('change', { bubbles: true }));
       return true;
     }
@@ -252,15 +264,16 @@
         if (textSpan) textSpan.textContent = this.getCurrentLangName();
       }
 
-      // 1. Try to trigger the select combo directly
-      const triggered = triggerGoogleCombo(langCode);
-
-      // 2. If combo is not ready or switching back to English, reload page with new cookie
-      if (!triggered || langCode === 'en') {
-        setTimeout(() => {
-          window.location.reload();
-        }, 150);
-      }
+      // Smooth trigger combo directly without any window.location.reload()
+      let attempts = 0;
+      const executeTrigger = () => {
+        const success = triggerGoogleCombo(langCode);
+        if (!success && attempts < 25) {
+          attempts++;
+          setTimeout(executeTrigger, 100);
+        }
+      };
+      executeTrigger();
     }
   }
 

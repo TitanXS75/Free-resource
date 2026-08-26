@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Globe, X } from 'lucide-react';
 
 export const SUPPORTED_LANGUAGES = [
@@ -90,13 +90,37 @@ const GoogleTranslate = () => {
             }
         }
 
-        const combo = document.querySelector('.goog-te-combo');
-        if (combo) {
-            combo.value = selected;
-            combo.dispatchEvent(new Event('change'));
-        } else {
-            window.location.reload();
-        }
+        const triggerCombo = (attempts = 0) => {
+            let combo = document.querySelector('.goog-te-combo');
+            if (!combo) {
+                const hidden = document.getElementById('google_translate_hidden_element');
+                if (hidden) combo = hidden.querySelector('select');
+            }
+
+            if (combo) {
+                if (selected === 'en') {
+                    let defaultVal = '';
+                    for (let i = 0; i < combo.options.length; i++) {
+                        const val = combo.options[i].value;
+                        if (val === '' || val === 'en' || val === 'auto') {
+                            defaultVal = val;
+                            break;
+                        }
+                    }
+                    combo.value = defaultVal;
+                } else {
+                    combo.value = selected;
+                }
+                combo.dispatchEvent(new Event('change', { bubbles: true }));
+                return;
+            }
+
+            if (attempts < 25) {
+                setTimeout(() => triggerCombo(attempts + 1), 100);
+            }
+        };
+
+        triggerCombo();
     };
 
     const currentLangObj = SUPPORTED_LANGUAGES.find(l => l.code === currentLang);

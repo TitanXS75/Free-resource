@@ -1,0 +1,29 @@
+﻿{
+  "name": "face-recognition-toolkit",
+  "version": "1.0.0",
+  "description": "Zero-cost, client-side face registration and recognition SDK built on TensorFlow.js & face-api.js",
+  "main": "src/face-engine.js",
+  "module": "src/face-engine.ts",
+  "types": "src/types.ts",
+  "scripts": {
+    "demo": "npx serve examples/vanilla-demo -p 3000",
+    "build": "tsc"
+  },
+  "keywords": [
+    "face-recognition",
+    "face-detection",
+    "biometrics",
+    "face-api",
+    "tensorflow",
+    "attendance",
+    "identity-verification"
+  ],
+  "author": "Antigravity Engineering",
+  "license": "MIT",
+  "dependencies": {
+    "face-api.js": "^0.22.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}

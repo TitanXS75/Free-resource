@@ -97,25 +97,47 @@ const GoogleTranslate = () => {
                 if (hidden) combo = hidden.querySelector('select');
             }
 
-            if (combo) {
+            if (combo && combo.options && combo.options.length > 1) {
+                let targetIndex = -1;
+                let targetVal = '';
+
                 if (selected === 'en') {
-                    let defaultVal = '';
                     for (let i = 0; i < combo.options.length; i++) {
                         const val = combo.options[i].value;
                         if (val === '' || val === 'en' || val === 'auto') {
-                            defaultVal = val;
+                            targetIndex = i;
+                            targetVal = val;
                             break;
                         }
                     }
-                    combo.value = defaultVal;
+                    if (targetIndex === -1) {
+                        targetIndex = 0;
+                        targetVal = combo.options[0].value;
+                    }
                 } else {
-                    combo.value = selected;
+                    for (let i = 0; i < combo.options.length; i++) {
+                        const val = combo.options[i].value;
+                        if (val.toLowerCase() === selected.toLowerCase()) {
+                            targetIndex = i;
+                            targetVal = val;
+                            break;
+                        }
+                    }
                 }
-                combo.dispatchEvent(new Event('change', { bubbles: true }));
-                return;
+
+                if (targetIndex !== -1) {
+                    combo.selectedIndex = targetIndex;
+                    combo.value = targetVal;
+                    combo.dispatchEvent(new Event('change', { bubbles: true }));
+                    combo.dispatchEvent(new Event('input', { bubbles: true }));
+                    if (typeof combo.onchange === 'function') {
+                        try { combo.onchange(); } catch (e) {}
+                    }
+                    return;
+                }
             }
 
-            if (attempts < 25) {
+            if (attempts < 60) {
                 setTimeout(() => triggerCombo(attempts + 1), 100);
             }
         };

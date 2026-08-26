@@ -70,24 +70,61 @@
       const hidden = document.getElementById('google_translate_hidden_element');
       if (hidden) combo = hidden.querySelector('select');
     }
-    if (combo) {
-      if (langCode === 'en') {
-        let defaultVal = '';
-        for (let i = 0; i < combo.options.length; i++) {
-          const val = combo.options[i].value;
-          if (val === '' || val === 'en' || val === 'auto') {
-            defaultVal = val;
-            break;
-          }
-        }
-        combo.value = defaultVal;
-      } else {
-        combo.value = langCode;
-      }
-      combo.dispatchEvent(new Event('change', { bubbles: true }));
-      return true;
+    if (!combo || !combo.options || combo.options.length <= 1) {
+      return false;
     }
-    return false;
+
+    let targetIndex = -1;
+    let targetValue = '';
+
+    if (langCode === 'en') {
+      for (let i = 0; i < combo.options.length; i++) {
+        const val = combo.options[i].value;
+        if (val === '' || val === 'en' || val === 'auto') {
+          targetIndex = i;
+          targetValue = val;
+          break;
+        }
+      }
+      if (targetIndex === -1) {
+        targetIndex = 0;
+        targetValue = combo.options[0].value;
+      }
+    } else {
+      for (let i = 0; i < combo.options.length; i++) {
+        const val = combo.options[i].value;
+        if (val.toLowerCase() === langCode.toLowerCase()) {
+          targetIndex = i;
+          targetValue = val;
+          break;
+        }
+      }
+    }
+
+    if (targetIndex === -1) {
+      return false;
+    }
+
+    combo.selectedIndex = targetIndex;
+    combo.value = targetValue;
+
+    combo.dispatchEvent(new Event('change', { bubbles: true }));
+    combo.dispatchEvent(new Event('input', { bubbles: true }));
+    if (typeof combo.onchange === 'function') {
+      try { combo.onchange(); } catch (e) {}
+    }
+
+    if (langCode === 'en') {
+      try {
+        const bannerFrame = document.querySelector('.goog-te-banner-frame');
+        if (bannerFrame && bannerFrame.contentDocument) {
+          const closeBtn = bannerFrame.contentDocument.querySelector('.goog-close-link');
+          if (closeBtn) closeBtn.click();
+        }
+      } catch (e) {}
+    }
+
+    return true;
   }
 
   function injectGoogleScript() {
@@ -145,6 +182,19 @@
       this.renderTrigger();
       this.renderModal();
       this.bindEvents();
+
+      // If user had previously selected a non-English language, apply it when Google Translate is ready
+      if (this.currentLang && this.currentLang !== 'en') {
+        let initAttempts = 0;
+        const initPoll = () => {
+          const success = triggerGoogleCombo(this.currentLang);
+          if (!success && initAttempts < 60) {
+            initAttempts++;
+            setTimeout(initPoll, 100);
+          }
+        };
+        initPoll();
+      }
     }
 
     getCurrentLangName() {
@@ -268,7 +318,7 @@
       let attempts = 0;
       const executeTrigger = () => {
         const success = triggerGoogleCombo(langCode);
-        if (!success && attempts < 25) {
+        if (!success && attempts < 60) {
           attempts++;
           setTimeout(executeTrigger, 100);
         }

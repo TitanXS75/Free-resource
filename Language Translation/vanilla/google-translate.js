@@ -30,13 +30,28 @@
   function getSavedLanguage() {
     if (typeof document === 'undefined') return 'en';
     const match = document.cookie.match(/(?:^|;\s*)googtrans=([^;]+)/);
-    if (!match) return 'en';
-    const val = decodeURIComponent(match[1]);
-    const parts = val.split('/');
-    return parts[parts.length - 1] || 'en';
+    if (match) {
+      const val = decodeURIComponent(match[1]);
+      const parts = val.split('/');
+      const code = parts[parts.length - 1];
+      if (code) return code;
+    }
+    try {
+      const local = localStorage.getItem('user_selected_language');
+      if (local) return local;
+    } catch (e) {}
+    return 'en';
   }
 
   function setLanguageCookie(langCode) {
+    try {
+      if (langCode === 'en') {
+        localStorage.removeItem('user_selected_language');
+      } else {
+        localStorage.setItem('user_selected_language', langCode);
+      }
+    } catch (e) {}
+
     const hostname = window.location.hostname;
     
     if (langCode === 'en') {

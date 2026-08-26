@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../../../Language Translation/vanilla/google-translate.css">
   <script src="face-api.min.js"></script>
 </head>
 <body>
@@ -39,6 +40,9 @@
     </div>
 
     <div class="header-right">
+      <!-- Live Zero-Reload Translation Widget -->
+      <div id="google-translate-widget"></div>
+
       <!-- Neural Net Status Indicator -->
       <div id="system-badge" class="system-status-pill loading">
         <span class="status-dot"></span>
@@ -238,6 +242,7 @@
   <!-- Toast Notification -->
   <div id="app-toast" class="app-toast"></div>
 
+  <script src="../../../Language Translation/vanilla/google-translate.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

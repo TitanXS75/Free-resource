@@ -19,16 +19,12 @@ const matchAvatarInitials = document.getElementById('match-avatar-initials');
 const recBadge = document.getElementById('rec-badge');
 const recName = document.getElementById('rec-name');
 const recRoleTag = document.getElementById('rec-role-tag');
-const recConf = document.getElementById('rec-conf');
 
 // Telemetry & Toggles
 const hudFps = document.getElementById('hud-fps');
 const hudLatency = document.getElementById('hud-latency');
 const toggleLandmarksCb = document.getElementById('toggle-landmarks-cb');
 const toggleCameraBtn = document.getElementById('toggle-camera-btn');
-const soundToggleBtn = document.getElementById('sound-toggle-btn');
-const soundOnIcon = document.getElementById('sound-on-icon');
-const soundOffIcon = document.getElementById('sound-off-icon');
 
 // Mode Buttons
 const modeScanBtn = document.getElementById('mode-scan-btn');
@@ -54,8 +50,7 @@ let labeledDescriptors = [];
 let faceMatcher = null;
 let isLoopRunning = false;
 let cameraStream = null;
-let isCameraPaused = false;
-let isSoundEnabled = true;
+let isCameraStopped = false;
 let showLandmarks = true;
 const STORAGE_KEY = 'FACE_REC_STANDALONE_DB';
 
@@ -64,88 +59,8 @@ let frameCount = 0;
 let lastFpsUpdate = performance.now();
 let lastLatency = 0;
 
-// Last match cache to prevent sound spam
-let lastMatchedLabel = null;
-let lastMatchedTime = 0;
-
 // ==========================================
-// 1. Audio Synthesizer (Zero external files)
-// ==========================================
-class BiometricAudio {
-  constructor() {
-    this.ctx = null;
-  }
-
-  ensureContext() {
-    if (!this.ctx) {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      if (AudioCtx) this.ctx = new AudioCtx();
-    }
-    if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume();
-    }
-  }
-
-  playMatchChime() {
-    if (!isSoundEnabled) return;
-    try {
-      this.ensureContext();
-      if (!this.ctx) return;
-      const now = this.ctx.currentTime;
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(587.33, now); // D5
-      osc.frequency.exponentialRampToValueAtTime(880, now + 0.12); // A5
-
-      gain.gain.setValueAtTime(0.08, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
-
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-
-      osc.start(now);
-      osc.stop(now + 0.25);
-    } catch (e) {
-      console.warn('Audio play warning:', e);
-    }
-  }
-
-  playEnrollSuccess() {
-    if (!isSoundEnabled) return;
-    try {
-      this.ensureContext();
-      if (!this.ctx) return;
-      const now = this.ctx.currentTime;
-      const notes = [523.25, 659.25, 783.99, 1046.5]; // C5, E5, G5, C6
-      notes.forEach((freq, i) => {
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        const t = now + i * 0.08;
-
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(freq, t);
-
-        gain.gain.setValueAtTime(0.1, t);
-        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
-
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-
-        osc.start(t);
-        osc.stop(t + 0.18);
-      });
-    } catch (e) {
-      console.warn('Audio play warning:', e);
-    }
-  }
-}
-
-const audioFX = new BiometricAudio();
-
-// ==========================================
-// 2. Toast Notifications
+// 1. Toast Notifications
 // ==========================================
 function showToast(msg, duration = 3000) {
   if (!appToast) return;
@@ -157,7 +72,7 @@ function showToast(msg, duration = 3000) {
 }
 
 // ==========================================
-// 3. Neural Network & Camera Initialization
+// 2. Neural Network & Camera Initialization
 // ==========================================
 async function initEngine() {
   try {
@@ -177,13 +92,13 @@ async function initEngine() {
     loadDatabase();
     await startCamera();
     startProcessingLoop();
-    showToast('✨ Neural Engine loaded successfully');
+    showToast('Neural Engine loaded successfully');
   } catch (err) {
     console.error('Initialization failed:', err);
     systemBadge.className = 'system-status-pill error';
     systemBadge.querySelector('.status-text').innerText = 'Model Load Error';
     detectionStatus.innerText = 'Error loading models: ' + err.message;
-    showToast('❌ Failed to load neural network weights');
+    showToast('Failed to load neural network weights');
   }
 }
 
@@ -195,15 +110,37 @@ async function startCamera() {
     });
     video.srcObject = cameraStream;
     await new Promise((resolve) => (video.onloadedmetadata = resolve));
-    video.play();
+    await video.play();
+    isCameraStopped = false;
   } catch (err) {
     detectionStatus.innerText = 'Camera access denied: ' + err.message;
-    showToast('⚠️ Camera permission denied or not found');
+    showToast('Camera permission denied or not found');
   }
 }
 
+function stopCamera() {
+  if (cameraStream) {
+    cameraStream.getTracks().forEach((track) => track.stop());
+    cameraStream = null;
+  }
+  video.pause();
+  video.srcObject = null;
+  isCameraStopped = true;
+
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  meterFill.style.width = '0%';
+  qualityText.innerText = '0%';
+  detectionStatus.innerText = 'Camera is stopped.';
+  detectionPulse.className = 'hud-pulse looking';
+  resetMatchUI();
+}
+
 // ==========================================
-// 4. Database Persistence & Management
+// 3. Database Persistence & Management
 // ==========================================
 function loadDatabase() {
   const raw = localStorage.getItem(STORAGE_KEY);
@@ -249,7 +186,7 @@ function rebuildMatcher() {
 }
 
 function getInitials(name) {
-  if (!name) return '??';
+  if (!name) return '--';
   const parts = name.trim().split(' ');
   if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
   return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
@@ -260,9 +197,8 @@ function renderRegisteredList() {
   if (labeledDescriptors.length === 0) {
     registeredList.innerHTML = `
       <div class="empty-state">
-        <div class="empty-icon">📭</div>
         <p class="empty-text">No biometric profiles enrolled yet.</p>
-        <span class="empty-sub">Enroll your face using the form above or import a profile JSON.</span>
+        <span class="empty-sub">Enroll your face using the form above or load demo profiles.</span>
       </div>
     `;
     return;
@@ -297,7 +233,7 @@ window.deleteFace = function (label) {
   if (confirm(`Remove biometric profile for '${label}'?`)) {
     labeledDescriptors = labeledDescriptors.filter((ld) => ld.label !== label);
     saveDatabase();
-    showToast(`🗑️ Profile removed: ${label}`);
+    showToast(`Profile removed: ${label}`);
   }
 };
 
@@ -306,14 +242,14 @@ clearAllBtn.addEventListener('click', () => {
   if (confirm('Are you sure you want to delete ALL enrolled biometric profiles?')) {
     labeledDescriptors = [];
     saveDatabase();
-    showToast('🗑️ All profiles cleared');
+    showToast('All profiles cleared');
   }
 });
 
 // JSON DB Export
 exportDbBtn.addEventListener('click', () => {
   if (labeledDescriptors.length === 0) {
-    showToast('⚠️ No profiles to export');
+    showToast('No profiles to export');
     return;
   }
   const serializable = labeledDescriptors.map((ld) => ({
@@ -328,7 +264,7 @@ exportDbBtn.addEventListener('click', () => {
   a.download = `neuralface_biometrics_${Date.now()}.json`;
   a.click();
   URL.revokeObjectURL(url);
-  showToast('💾 Database exported as JSON');
+  showToast('Database exported as JSON');
 });
 
 // JSON DB Import
@@ -351,7 +287,7 @@ importFileInput.addEventListener('change', (e) => {
 
       labeledDescriptors = [...labeledDescriptors, ...newItems];
       saveDatabase();
-      showToast(`📥 Successfully imported ${newItems.length} profile(s)`);
+      showToast(`Successfully imported ${newItems.length} profile(s)`);
     } catch (err) {
       alert('Failed to import JSON: ' + err.message);
     }
@@ -363,14 +299,13 @@ importFileInput.addEventListener('change', (e) => {
 // Sample Profiles Shortcut
 loadSamplesBtn.addEventListener('click', () => {
   const sampleNames = [
-    { label: 'Tim Cook (Sample)', role: 'Apple CEO' },
-    { label: 'Ada Lovelace (Sample)', role: 'Lead Architect' },
+    { label: 'Alex Morgan', role: 'System Admin' },
+    { label: 'Elena Rostova', role: 'Security Lead' },
   ];
 
   let added = 0;
   sampleNames.forEach((s) => {
     if (!labeledDescriptors.some((ld) => ld.label === s.label)) {
-      // Create synthetic pseudo 128-d vector for demonstration
       const dummyVec = new Float32Array(128).map(() => (Math.random() - 0.5) * 0.1);
       const ld = new faceapi.LabeledFaceDescriptors(s.label, [dummyVec]);
       ld.role = s.role;
@@ -381,14 +316,14 @@ loadSamplesBtn.addEventListener('click', () => {
 
   if (added > 0) {
     saveDatabase();
-    showToast(`⚡ Added ${added} demo sample profile(s)`);
+    showToast(`Added ${added} demo sample profile(s)`);
   } else {
-    showToast('ℹ️ Sample profiles already exist');
+    showToast('Sample profiles already exist');
   }
 });
 
 // ==========================================
-// 5. Continuous Frame Processing & Canvas HUD
+// 4. Continuous Frame Processing & Canvas HUD
 // ==========================================
 async function startProcessingLoop() {
   isLoopRunning = true;
@@ -398,7 +333,7 @@ async function startProcessingLoop() {
 
     const tStart = performance.now();
 
-    if (video.readyState === 4 && !video.paused && !isCameraPaused) {
+    if (!isCameraStopped && video.readyState === 4 && !video.paused) {
       if (canvas.width !== video.videoWidth || canvas.height !== video.videoHeight) {
         faceapi.matchDimensions(canvas, { width: video.videoWidth, height: video.videoHeight });
       }
@@ -433,7 +368,7 @@ async function startProcessingLoop() {
         if (qualityScore >= 70) {
           meterFill.style.backgroundColor = 'var(--accent-emerald)';
           detectionPulse.className = 'hud-pulse optimal';
-          detectionStatus.innerText = 'Optimal face alignment — ready for ID';
+          detectionStatus.innerText = 'Optimal face alignment';
         } else if (qualityScore >= 50) {
           meterFill.style.backgroundColor = 'var(--accent-amber)';
           detectionPulse.className = 'hud-pulse looking';
@@ -441,7 +376,7 @@ async function startProcessingLoop() {
         } else {
           meterFill.style.backgroundColor = 'var(--accent-rose)';
           detectionPulse.className = 'hud-pulse low';
-          detectionStatus.innerText = 'Face too distant or off-center';
+          detectionStatus.innerText = 'Face off-center';
         }
 
         // Draw HUD Landmarks if enabled
@@ -459,23 +394,15 @@ async function startProcessingLoop() {
           const role = foundObj?.role || 'Enrolled User';
 
           if (isMatch) {
-            drawCyberReticle(ctx, box, match.label, `${conf}% Verified`, '#10b981');
-            updateMatchUI(true, match.label, role, conf);
-
-            // Play match sound if new subject or cooled down
-            const now = Date.now();
-            if (lastMatchedLabel !== match.label || now - lastMatchedTime > 6000) {
-              audioFX.playMatchChime();
-              lastMatchedLabel = match.label;
-              lastMatchedTime = now;
-            }
+            drawCyberReticle(ctx, box, match.label, `${conf}% Match`, '#10b981');
+            updateMatchUI(true, match.label, role);
           } else {
-            drawCyberReticle(ctx, box, 'Unknown Subject', `${conf}% Sim`, '#f43f5e');
-            updateMatchUI(false, 'Unknown Subject', 'Unregistered Biometric', conf);
+            drawCyberReticle(ctx, box, 'Unknown Face', '', '#f43f5e');
+            updateMatchUI(false, 'Unknown Face', 'Not in vector database');
           }
         } else {
           drawCyberReticle(ctx, box, 'Face Detected', `${qualityScore}% Alignment`, '#06b6d4');
-          updateMatchUI(null, 'Face Detected', 'Registry empty or unregistered', 0);
+          updateMatchUI(null, 'Face Detected', 'Registry empty or unregistered');
         }
       } else {
         // No face in frame
@@ -507,11 +434,11 @@ async function startProcessingLoop() {
 }
 
 // ==========================================
-// 6. Futuristic Canvas HUD Drawing
+// 5. Un-Mirrored Readable Canvas HUD Drawing
 // ==========================================
 function drawCyberReticle(ctx, box, title, subText, color) {
   const { x, y, width, height } = box;
-  const cornerSize = Math.min(24, width * 0.2);
+  const cornerSize = Math.min(22, width * 0.2);
   const pad = 6;
 
   const rx = x - pad;
@@ -525,57 +452,48 @@ function drawCyberReticle(ctx, box, title, subText, color) {
   ctx.shadowColor = color;
   ctx.shadowBlur = 8;
 
-  // Top-left
+  // Corner brackets
   ctx.beginPath();
-  ctx.moveTo(rx, ry + cornerSize);
-  ctx.lineTo(rx, ry);
-  ctx.lineTo(rx + cornerSize, ry);
+  ctx.moveTo(rx, ry + cornerSize); ctx.lineTo(rx, ry); ctx.lineTo(rx + cornerSize, ry);
+  ctx.moveTo(rx + rw - cornerSize, ry); ctx.lineTo(rx + rw, ry); ctx.lineTo(rx + rw, ry + cornerSize);
+  ctx.moveTo(rx, ry + rh - cornerSize); ctx.lineTo(rx, ry + rh); ctx.lineTo(rx + cornerSize, ry + rh);
+  ctx.moveTo(rx + rw - cornerSize, ry + rh); ctx.lineTo(rx + rw, ry + rh); ctx.lineTo(rx + rw, ry + rh - cornerSize);
   ctx.stroke();
 
-  // Top-right
-  ctx.beginPath();
-  ctx.moveTo(rx + rw - cornerSize, ry);
-  ctx.lineTo(rx + rw, ry);
-  ctx.lineTo(rx + rw, ry + cornerSize);
-  ctx.stroke();
-
-  // Bottom-left
-  ctx.beginPath();
-  ctx.moveTo(rx, ry + rh - cornerSize);
-  ctx.lineTo(rx, ry + rh);
-  ctx.lineTo(rx + cornerSize, ry + rh);
-  ctx.stroke();
-
-  // Bottom-right
-  ctx.beginPath();
-  ctx.moveTo(rx + rw - cornerSize, ry + rh);
-  ctx.lineTo(rx + rw, ry + rh);
-  ctx.lineTo(rx + rw, ry + rh - cornerSize);
-  ctx.stroke();
-
-  // Badge Container on Top
+  // Measure text width for badge background
+  const fullLabel = subText ? `${title} (${subText})` : title;
+  ctx.font = '600 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto';
+  const textWidth = ctx.measureText(fullLabel).width;
   const badgeH = 24;
-  const badgeW = Math.max(130, ctx.measureText(`${title} • ${subText}`).width + 20);
+  const badgeW = textWidth + 18;
   const bx = rx;
-  const by = Math.max(10, ry - badgeH - 6);
+  const by = Math.max(8, ry - badgeH - 6);
 
-  ctx.fillStyle = 'rgba(8, 12, 20, 0.85)';
+  ctx.fillStyle = 'rgba(8, 12, 20, 0.9)';
   ctx.fillRect(bx, by, badgeW, badgeH);
 
   ctx.strokeStyle = color;
   ctx.lineWidth = 1;
   ctx.strokeRect(bx, by, badgeW, badgeH);
 
-  // Text inside badge
+  // UN-MIRROR the text: since canvas has CSS scaleX(-1), flip horizontally around badge center
+  ctx.save();
+  ctx.translate(bx + badgeW / 2, by + badgeH / 2);
+  ctx.scale(-1, 1);
+  ctx.translate(-(bx + badgeW / 2), -(by + badgeH / 2));
+
   ctx.fillStyle = '#ffffff';
   ctx.font = '600 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto';
   ctx.shadowBlur = 0;
-  ctx.fillText(`${title} `, bx + 8, by + 16);
+  ctx.fillText(title, bx + 9, by + 16);
 
-  const titleWidth = ctx.measureText(`${title} `).width;
-  ctx.fillStyle = color;
-  ctx.font = '600 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto';
-  ctx.fillText(`(${subText})`, bx + 8 + titleWidth, by + 16);
+  if (subText) {
+    const titleW = ctx.measureText(`${title} `).width;
+    ctx.fillStyle = color;
+    ctx.font = '600 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto';
+    ctx.fillText(`(${subText})`, bx + 9 + titleW, by + 16);
+  }
+  ctx.restore();
 
   ctx.restore();
 }
@@ -584,7 +502,7 @@ function drawFuturisticLandmarks(ctx, landmarks) {
   const positions = landmarks.positions;
   ctx.save();
 
-  // Draw delicate constellation points
+  // Draw constellation points
   positions.forEach((pt) => {
     ctx.beginPath();
     ctx.arc(pt.x, pt.y, 1.8, 0, 2 * Math.PI);
@@ -614,9 +532,9 @@ function drawFuturisticLandmarks(ctx, landmarks) {
 }
 
 // ==========================================
-// 7. Match UI Updates
+// 6. Match UI Updates
 // ==========================================
-function updateMatchUI(isVerified, name, role, conf) {
+function updateMatchUI(isVerified, name, role) {
   if (isVerified === true) {
     matchResultCard.className = 'match-result-card matched';
     matchAvatarCircle.className = 'match-avatar-circle verified';
@@ -625,25 +543,22 @@ function updateMatchUI(isVerified, name, role, conf) {
     recBadge.innerText = 'Verified';
     recName.innerText = name;
     recRoleTag.innerText = role;
-    recConf.innerText = `${conf}%`;
   } else if (isVerified === false) {
     matchResultCard.className = 'match-result-card unrecognized';
     matchAvatarCircle.className = 'match-avatar-circle';
-    matchAvatarInitials.innerText = '??';
+    matchAvatarInitials.innerText = '--';
     recBadge.className = 'rec-badge status-unknown';
     recBadge.innerText = 'Unknown';
     recName.innerText = 'Unregistered Face';
     recRoleTag.innerText = 'Not in vector database';
-    recConf.innerText = `${conf}%`;
   } else {
     matchResultCard.className = 'match-result-card';
     matchAvatarCircle.className = 'match-avatar-circle';
-    matchAvatarInitials.innerText = '👤';
+    matchAvatarInitials.innerText = '--';
     recBadge.className = 'rec-badge status-none';
     recBadge.innerText = 'Detected';
     recName.innerText = name;
     recRoleTag.innerText = role;
-    recConf.innerText = '--';
   }
 }
 
@@ -655,19 +570,23 @@ function resetMatchUI() {
   recBadge.innerText = 'Searching';
   recName.innerText = 'Awaiting Subject';
   recRoleTag.innerText = '--';
-  recConf.innerText = '0%';
 }
 
 // ==========================================
-// 8. Face Enrollment Trigger
+// 7. Face Enrollment Trigger
 // ==========================================
 captureBtn.addEventListener('click', async () => {
   const name = personNameInput.value.trim();
   const role = personRoleInput.value.trim();
 
   if (!name) {
-    showToast('⚠️ Please enter a Name or ID');
+    showToast('Please enter a Name or ID');
     personNameInput.focus();
+    return;
+  }
+
+  if (isCameraStopped) {
+    showToast('Start camera before capturing face');
     return;
   }
 
@@ -682,7 +601,7 @@ captureBtn.addEventListener('click', async () => {
       .withFaceDescriptor();
 
     if (!detection) {
-      showToast('❌ Could not detect clear face. Please look at camera.');
+      showToast('Could not detect clear face. Look at camera.');
       return;
     }
 
@@ -701,20 +620,19 @@ captureBtn.addEventListener('click', async () => {
     if (existing) {
       existing.descriptors.push(detection.descriptor);
       if (role) existing.role = role;
-      showToast(`✨ Added additional vector angle to '${name}'`);
+      showToast(`Added additional vector angle to '${name}'`);
     } else {
       const ld = new faceapi.LabeledFaceDescriptors(name, [detection.descriptor]);
       ld.role = role || 'Enrolled User';
       labeledDescriptors.push(ld);
-      showToast(`🎉 Successfully enrolled '${name}'`);
+      showToast(`Successfully enrolled '${name}'`);
     }
 
-    audioFX.playEnrollSuccess();
     saveDatabase();
     personNameInput.value = '';
     personRoleInput.value = '';
   } catch (err) {
-    showToast('❌ Enrollment error: ' + err.message);
+    showToast('Enrollment error: ' + err.message);
   } finally {
     captureBtn.disabled = false;
     captureBtn.querySelector('.btn-label').innerText = 'Capture & Enroll Face';
@@ -722,7 +640,7 @@ captureBtn.addEventListener('click', async () => {
 });
 
 // ==========================================
-// 9. Interactive Controls & Mode Switching
+// 8. Interactive Controls & Mode Switching
 // ==========================================
 modeScanBtn.addEventListener('click', () => {
   currentMode = 'scan';
@@ -746,27 +664,18 @@ toggleLandmarksCb.addEventListener('change', (e) => {
   showLandmarks = e.target.checked;
 });
 
-toggleCameraBtn.addEventListener('click', () => {
-  isCameraPaused = !isCameraPaused;
-  if (isCameraPaused) {
-    video.pause();
-    toggleCameraBtn.querySelector('.btn-label').innerText = 'Resume Camera';
-    toggleCameraBtn.querySelector('.btn-icon').innerText = '▶️';
-    showToast('⏸️ Camera stream paused');
+toggleCameraBtn.addEventListener('click', async () => {
+  if (!isCameraStopped) {
+    stopCamera();
+    toggleCameraBtn.querySelector('.btn-label').innerText = 'Start Camera';
+    showToast('Camera stopped');
   } else {
-    video.play();
-    toggleCameraBtn.querySelector('.btn-label').innerText = 'Pause Camera';
-    toggleCameraBtn.querySelector('.btn-icon').innerText = '📷';
-    showToast('▶️ Camera stream resumed');
+    toggleCameraBtn.querySelector('.btn-label').innerText = 'Starting...';
+    await startCamera();
+    toggleCameraBtn.querySelector('.btn-label').innerText = 'Stop Camera';
+    detectionStatus.innerText = 'Looking for human face...';
+    showToast('Camera started');
   }
-});
-
-soundToggleBtn.addEventListener('click', () => {
-  isSoundEnabled = !isSoundEnabled;
-  soundToggleBtn.classList.toggle('active', isSoundEnabled);
-  soundOnIcon.style.display = isSoundEnabled ? 'block' : 'none';
-  soundOffIcon.style.display = isSoundEnabled ? 'none' : 'block';
-  showToast(isSoundEnabled ? '🔊 Audio effects enabled' : '🔇 Audio effects muted');
 });
 
 // Launch on start

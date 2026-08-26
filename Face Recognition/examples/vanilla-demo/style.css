@@ -680,41 +680,11 @@ canvas {
   color: var(--text-secondary);
 }
 
-.match-confidence-gauge {
-  flex-shrink: 0;
-}
-
-.confidence-circle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-subtle);
-}
-
-.confidence-pct {
-  font-size: 15px;
-  font-weight: 700;
-  font-family: var(--font-mono);
-  color: #38bdf8;
-}
-
-.confidence-sub {
-  font-size: 9px;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-  letter-spacing: 0.4px;
-}
-
 /* Sidebar Layout */
 .sidebar-layout {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 /* Registration Form Studio */
@@ -736,22 +706,9 @@ canvas {
   color: var(--text-secondary);
 }
 
-.input-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.input-icon {
-  position: absolute;
-  left: 12px;
-  font-size: 14px;
-  pointer-events: none;
-}
-
 .glass-input-group input {
   width: 100%;
-  padding: 11px 14px 11px 36px;
+  padding: 10px 14px;
   background: rgba(8, 11, 18, 0.85);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);

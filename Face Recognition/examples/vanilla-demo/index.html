@@ -23,7 +23,7 @@
   <header class="app-header">
     <div class="header-left">
       <a href="../../../index.html" class="nav-back-link" title="Back to All Free Components">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
         <span>All Components</span>
@@ -31,7 +31,6 @@
       <div class="header-divider"></div>
       <div class="brand-info">
         <div class="brand-title-row">
-          <span class="brand-icon">👤</span>
           <h1 class="brand-name">NeuralFace ID</h1>
           <span class="version-badge">v2.0 Pro</span>
         </div>
@@ -46,22 +45,9 @@
         <span class="status-text">Loading Neural Weights...</span>
       </div>
 
-      <!-- Sound Toggle -->
-      <button type="button" id="sound-toggle-btn" class="icon-btn active" title="Toggle Biometric Sound Effects">
-        <svg id="sound-on-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-        </svg>
-        <svg id="sound-off-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
-          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-          <line x1="23" y1="9" x2="17" y2="15"></line>
-          <line x1="17" y1="9" x2="23" y2="15"></line>
-        </svg>
-      </button>
-
       <!-- GitHub Link -->
       <a href="https://github.com/TitanXS75/Free-resource" target="_blank" rel="noopener noreferrer" class="github-pill-btn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
         </svg>
         <span>GitHub</span>
@@ -84,20 +70,17 @@
           </div>
           <span class="hud-sub">68-Point Facial Landmark Mapping</span>
         </div>
-        <button id="toggle-camera-btn" class="glass-btn btn-compact">
-          <span class="btn-icon">📷</span>
-          <span class="btn-label">Pause Camera</span>
+        <button type="button" id="toggle-camera-btn" class="glass-btn btn-compact">
+          <span class="btn-label">Stop Camera</span>
         </button>
       </div>
 
       <!-- Segmented Mode Controller (Apple Style) -->
       <div class="segmented-control" role="tablist">
         <button type="button" id="mode-scan-btn" class="segment-btn active" role="tab" aria-selected="true">
-          <span class="segment-icon">🔍</span>
           <span>Live Identification</span>
         </button>
         <button type="button" id="mode-register-btn" class="segment-btn" role="tab" aria-selected="false">
-          <span class="segment-icon">➕</span>
           <span>Face Enrollment</span>
         </button>
       </div>
@@ -136,7 +119,7 @@
           </div>
 
           <div class="quality-meter-cluster">
-            <span class="quality-label">Alignment Quality:</span>
+            <span class="quality-label">Alignment:</span>
             <div class="meter-track">
               <div id="meter-fill" class="meter-fill-bar"></div>
             </div>
@@ -162,12 +145,6 @@
             <span id="rec-role-tag" class="rec-role-tag">--</span>
           </div>
         </div>
-        <div class="match-confidence-gauge">
-          <div class="confidence-circle">
-            <span id="rec-conf" class="confidence-pct">0%</span>
-            <span class="confidence-sub">Confidence</span>
-          </div>
-        </div>
       </div>
 
     </section>
@@ -180,7 +157,6 @@
         <div class="panel-header">
           <div class="panel-header-left">
             <div class="scanner-title-group">
-              <span class="enroll-badge-icon">✨</span>
               <h2>Enroll Biometric ID</h2>
             </div>
             <span class="hud-sub">Extract 128-D Neural Vector</span>
@@ -189,28 +165,21 @@
 
         <div class="form-body">
           <div class="glass-input-group">
-            <label for="person-name">Subject Full Name / Employee ID</label>
-            <div class="input-wrapper">
-              <span class="input-icon">👤</span>
-              <input type="text" id="person-name" placeholder="e.g. Steve Jobs (EMP-001)" autocomplete="off">
-            </div>
+            <label for="person-name">Full Name / Employee ID</label>
+            <input type="text" id="person-name" placeholder="e.g. John Doe (EMP-001)" autocomplete="off">
           </div>
 
           <div class="glass-input-group">
             <label for="person-display-name">Role / Title / Department</label>
-            <div class="input-wrapper">
-              <span class="input-icon">💼</span>
-              <input type="text" id="person-display-name" placeholder="e.g. Chief Executive Officer" autocomplete="off">
-            </div>
+            <input type="text" id="person-display-name" placeholder="e.g. Senior Engineer" autocomplete="off">
           </div>
 
           <button id="capture-face-btn" class="glass-btn btn-primary btn-large">
-            <span class="btn-icon">📸</span>
-            <span class="btn-label">Capture & Enroll Face</span>
+            <span class="btn-label">Capture &amp; Enroll Face</span>
           </button>
 
           <p id="register-hint" class="guidance-hint">
-            💡 Position subject centrally with face quality score <strong>&ge; 70%</strong> before capture.
+            Position subject centrally with face alignment quality &ge; 70% before capture.
           </p>
         </div>
       </section>
@@ -220,14 +189,13 @@
         <div class="panel-header">
           <div class="panel-header-left">
             <div class="scanner-title-group">
-              <span class="db-badge-icon">🗄️</span>
               <h2>Vector Registry</h2>
             </div>
             <span class="hud-sub">Enrolled Profiles (<span id="face-count">0</span>)</span>
           </div>
           <div class="db-action-cluster">
             <button id="export-db-btn" class="text-action-btn" title="Export Vector Database JSON">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                 <polyline points="7 10 12 15 17 10"></polyline>
                 <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -235,7 +203,7 @@
               <span>Export</span>
             </button>
             <button id="import-db-btn" class="text-action-btn" title="Import Vector Database JSON">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                 <polyline points="17 8 12 3 7 8"></polyline>
                 <line x1="12" y1="3" x2="12" y2="15"></line>
@@ -252,15 +220,14 @@
         <!-- Enrolled List -->
         <div id="registered-list" class="registered-faces-scroll">
           <div class="empty-state">
-            <div class="empty-icon">📭</div>
             <p class="empty-text">No biometric profiles enrolled yet.</p>
-            <span class="empty-sub">Enroll your face using the form above or import a profile JSON.</span>
+            <span class="empty-sub">Enroll your face using the form above or load demo profiles.</span>
           </div>
         </div>
 
         <!-- Quick Demo Profiles Shortcut -->
         <div class="quick-demo-footer">
-          <span class="quick-demo-title">⚡ Quick Test:</span>
+          <span class="quick-demo-title">Quick Test:</span>
           <button type="button" id="load-samples-btn" class="demo-chip-btn">Load Demo Sample Profiles</button>
         </div>
       </section>

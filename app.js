@@ -75,8 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
           .writeText(textToCopy.trim())
           .then(() => {
             const originalLabel = btn.innerHTML;
-            btn.innerHTML = '<span>✓ Copied</span>';
-            showToast('📋 Code copied to clipboard');
+            btn.innerHTML = '<span>Copied</span>';
+            showToast('Code copied to clipboard');
             setTimeout(() => {
               btn.innerHTML = originalLabel;
             }, 2000);
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           isMiniScanning = true;
           startMiniCamBtn.disabled = false;
-          startMiniCamBtn.innerHTML = '<span>⏹️ Stop Mini Scanner</span>';
+          startMiniCamBtn.innerHTML = '<span>Stop Mini Scanner</span>';
           startMiniCamBtn.classList.remove('primary');
           miniCamStatus.innerText = 'Scanning live camera feed...';
 
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
           console.error(err);
           startMiniCamBtn.disabled = false;
           miniCamStatus.innerText = 'Error: ' + err.message;
-          showToast('⚠️ Could not initialize camera/models');
+          showToast('Could not initialize camera/models');
         }
       } else {
         // Stop Scanner
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const ctx = miniCanvas.getContext('2d');
         ctx.clearRect(0, 0, miniCanvas.width, miniCanvas.height);
 
-        startMiniCamBtn.innerHTML = '<span>📹 Launch Live Mini Scanner</span>';
+        startMiniCamBtn.innerHTML = '<span>Launch Mini Scanner</span>';
         startMiniCamBtn.classList.add('primary');
         miniCamStatus.innerText = 'Camera paused.';
       }

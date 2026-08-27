@@ -38,6 +38,34 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.18) #08090d;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #08090d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-full);
+  border: 2px solid #08090d;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.45);
+}
+
 body {
   background-color: var(--bg-app);
   color: var(--text-primary);
@@ -47,6 +75,7 @@ body {
   flex-direction: column;
   position: relative;
   overflow-x: hidden;
+  width: 100%;
 }
 
 /* Ambient dynamic background lighting */
@@ -55,7 +84,8 @@ body {
   top: -150px;
   left: 50%;
   transform: translateX(-50%);
-  width: 900px;
+  width: 100%;
+  max-width: 900px;
   height: 450px;
   background: radial-gradient(ellipse at center, rgba(0, 113, 227, 0.15), rgba(6, 182, 212, 0.08), transparent 70%);
   pointer-events: none;
@@ -134,16 +164,6 @@ body {
   background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.version-badge {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 7px;
-  border-radius: var(--radius-full);
-  background: rgba(0, 113, 227, 0.15);
-  color: #38bdf8;
-  border: 1px solid rgba(56, 189, 248, 0.3);
 }
 
 .brand-desc {
@@ -1018,5 +1038,211 @@ canvas {
   50% {
     opacity: 0.4;
     transform: scale(0.85);
+  }
+}
+
+/* =============================================================================
+   Dedicated Mobile Responsive Optimizations for Biometric Demo
+   ============================================================================= */
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 10px 14px;
+    gap: 8px;
+  }
+
+  .header-left {
+    gap: 10px;
+  }
+
+  .nav-back-link {
+    padding: 6px 8px;
+  }
+
+  .nav-back-link span {
+    display: none;
+  }
+
+  .header-divider {
+    display: none;
+  }
+
+  .brand-desc {
+    display: none;
+  }
+
+  .brand-name {
+    font-size: 15px;
+  }
+
+  .header-right {
+    gap: 6px;
+  }
+
+  .system-status-pill {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+
+  .system-status-pill .status-text {
+    max-width: 90px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .github-pill-btn {
+    padding: 6px 8px;
+  }
+
+  .github-pill-btn span {
+    display: none;
+  }
+
+  .app-layout {
+    padding: 14px 12px 40px;
+    gap: 16px;
+    grid-template-columns: 1fr;
+  }
+
+  .glass-panel {
+    padding: 16px 14px;
+    border-radius: var(--radius-md);
+    gap: 14px;
+  }
+
+  .scanner-title-group h2 {
+    font-size: 16px;
+  }
+
+  .hud-sub {
+    font-size: 11px;
+  }
+
+  .video-hud-wrapper {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-sm);
+  }
+
+  .top-left-badge {
+    top: 8px;
+    left: 8px;
+    padding: 3px 8px;
+    font-size: 10px;
+  }
+
+  .top-right-badge {
+    top: 8px;
+    right: 8px;
+    padding: 3px 8px;
+    font-size: 10px;
+  }
+
+  .reticle-corner {
+    width: 16px;
+    height: 16px;
+  }
+
+  .reticle-corner.top-left {
+    top: 8px;
+    left: 8px;
+  }
+  .reticle-corner.top-right {
+    top: 8px;
+    right: 8px;
+  }
+  .reticle-corner.bottom-left {
+    bottom: 54px;
+    left: 8px;
+  }
+  .reticle-corner.bottom-right {
+    bottom: 54px;
+    right: 8px;
+  }
+
+  .camera-bottom-hud {
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .detection-status-text {
+    font-size: 11.5px;
+  }
+
+  .quality-label {
+    display: none;
+  }
+
+  .meter-track {
+    width: 50px;
+  }
+
+  .quality-value {
+    font-size: 11px;
+    min-width: 24px;
+  }
+
+  .match-result-card {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .match-avatar-circle {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .rec-subject-name {
+    font-size: 15px;
+  }
+
+  .glass-input-group input {
+    font-size: 16px; /* Prevents auto-zoom in iOS Safari */
+    padding: 10px 12px;
+  }
+
+  .glass-btn.btn-large {
+    padding: 12px 16px;
+    font-size: 13.5px;
+    width: 100%;
+  }
+
+  .db-action-cluster {
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .quick-demo-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .demo-chip-btn {
+    text-align: center;
+    padding: 8px 12px;
+  }
+
+  .app-toast {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    max-width: calc(100% - 24px);
+    text-align: center;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 420px) {
+  .system-status-pill .status-text {
+    display: none;
+  }
+
+  .system-status-pill {
+    padding: 6px 8px;
   }
 }

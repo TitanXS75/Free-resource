@@ -31,9 +31,11 @@
 </head>
 <body>
 
-  <!-- Ambient Dynamic Glows -->
-  <div class="ambient-glow-top"></div>
-  <div class="ambient-glow-center"></div>
+  <!-- Ambient Dynamic Glows (Contained) -->
+  <div class="ambient-glows-wrapper">
+    <div class="ambient-glow-top"></div>
+    <div class="ambient-glow-center"></div>
+  </div>
 
   <!-- Navigation Bar -->
   <header class="navbar">
@@ -46,7 +48,6 @@
 
       <ul class="nav-links">
         <li><a href="#showcase">Showcase</a></li>
-        <li><a href="#comparison">Cost vs Cloud APIs</a></li>
         <li><a href="#components">Components</a></li>
       </ul>
 
@@ -263,77 +264,6 @@
     </div>
   </section>
 
-  <!-- Cost Comparison Section -->
-  <section id="comparison" class="comparison-section">
-    <div class="container">
-      
-      <div class="section-header-center">
-        <div class="section-tag">Zero Cloud Invoices</div>
-        <h2 class="section-heading">Commercial Cloud APIs vs FreeResource</h2>
-        <p class="section-desc">Why pay monthly cloud bills when client browsers can do the work for free?</p>
-      </div>
-
-      <div class="comparison-table-wrapper">
-        <table class="comparison-table">
-          <thead>
-            <tr>
-              <th>Feature &amp; Metric</th>
-              <th>FreeResource (Client-Side)</th>
-              <th>Commercial Cloud APIs (AWS / GCP / Azure)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="col-feature">API Cost per 100,000 requests</td>
-              <td class="col-free-resource"><span class="badge-tag-free">$0.00 (Free Forever)</span></td>
-              <td class="col-commercial-api"><span class="badge-tag-paid">$150 – $300 / mo</span></td>
-            </tr>
-            <tr>
-              <td class="col-feature">Per-Character Translation Pricing</td>
-              <td class="col-free-resource"><span class="badge-tag-free">Unlimited ($0.00)</span></td>
-              <td class="col-commercial-api"><span class="badge-tag-paid">$20 per 1M characters</span></td>
-            </tr>
-            <tr>
-              <td class="col-feature">Data Privacy &amp; GDPR / HIPAA</td>
-              <td class="col-free-resource">100% on-device (Zero camera/text sent to cloud)</td>
-              <td class="col-commercial-api">Data sent to external cloud servers</td>
-            </tr>
-            <tr>
-              <td class="col-feature">API Keys &amp; Backend Infrastructure</td>
-              <td class="col-free-resource">None required (Pure frontend)</td>
-              <td class="col-commercial-api">Requires secret keys &amp; quota limits</td>
-            </tr>
-            <tr>
-              <td class="col-feature">Page Reload on Translation Switch</td>
-              <td class="col-free-resource"><strong>Zero reload (Instant in-place DOM)</strong></td>
-              <td class="col-commercial-api">Varies (Often requires full reload)</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- ROI Calculator Grid -->
-      <div class="calculator-grid">
-        <div class="calc-card">
-          <div class="calc-traffic">Small App (10k monthly active users)</div>
-          <div class="calc-price-free">$0 / mo</div>
-          <div class="calc-price-paid">Normally $80 / mo</div>
-        </div>
-        <div class="calc-card highlight">
-          <div class="calc-traffic">Growing SaaS (100k monthly active users)</div>
-          <div class="calc-price-free">$0 / mo</div>
-          <div class="calc-price-paid">Normally $750 / mo</div>
-        </div>
-        <div class="calc-card">
-          <div class="calc-traffic">Enterprise Portal (1M+ requests)</div>
-          <div class="calc-price-free">$0 / mo</div>
-          <div class="calc-price-paid">Normally $3,500+ / mo</div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
   <!-- Components Directory Section -->
   <section id="components" class="showcase-section">
     <div class="container">
@@ -386,7 +316,6 @@
       </div>
       <ul class="footer-links">
         <li><a href="#showcase">Showcase</a></li>
-        <li><a href="#comparison">Pricing Comparison</a></li>
         <li><a href="#components">Components</a></li>
         <li><a href="https://github.com/TitanXS75/Free-resource" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
       </ul>

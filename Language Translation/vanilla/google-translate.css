@@ -336,3 +336,43 @@ iframe.VIpgJd-ZVi9od-OR94Gd-PR6tc,
 .gt-apply-btn:active {
   transform: translateY(0);
 }
+
+@media (max-width: 640px), (max-height: 700px) {
+  .gt-modal-backdrop {
+    padding: 12px;
+  }
+
+  .gt-modal-card {
+    max-height: 90vh;
+    border-radius: 16px;
+  }
+
+  .gt-modal-header {
+    padding: 16px 20px 12px;
+  }
+
+  .gt-header-title {
+    font-size: 18px;
+  }
+
+  .gt-header-subtitle {
+    font-size: 12.5px;
+  }
+
+  .gt-modal-body {
+    padding: 14px 16px 16px;
+    overflow-y: auto;
+    max-height: 58vh;
+  }
+
+  .gt-modal-footer {
+    padding: 14px 16px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+  }
+
+  .gt-apply-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
